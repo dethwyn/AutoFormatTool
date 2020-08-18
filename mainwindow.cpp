@@ -3,18 +3,15 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
+    , ui(new Ui::MainWindow) {
     ui->setupUi(this);
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::on_btPath_clicked()
-{
+void MainWindow::on_btPath_clicked() {
     auto path = QFileDialog::getExistingDirectory();
     ui->tbPath->setText(path);
     QDir dir;
@@ -26,16 +23,11 @@ void MainWindow::on_btPath_clicked()
     }
 }
 
-void MainWindow::on_pbFormat_clicked()
-{
+void MainWindow::on_pbFormat_clicked() {
     if (ui->listFiles->count() != 0) {
-        QString pathToOptions;
-        if (ui->tbPathToOptions->text() != "") {
-            pathToOptions = ui->tbPathToOptions->text() + " ";
-        }
-        else {
-            pathToOptions = "debug/data/format.astylerc ";
-        }
+
+        QString pathToOptions = "debug/data/formatCodeVNIIA.astylerc ";
+
 
         for (int i = 0; i < ui->listFiles->count(); i++) {
             ui->listFiles->setCurrentRow(i);
@@ -45,17 +37,19 @@ void MainWindow::on_pbFormat_clicked()
             params.append("astyle --options=" + pathToOptions + pathToFile);
             qDebug() << params;
             QProcess::startDetached(command, params);
-
         }
     }
     else {
-
+        QMessageBox msgBox;
+        msgBox.setText("Не выбран ни один файл с исходным кодом!");
+        msgBox.exec();
     }
-
 }
 
-void MainWindow::on_pbPathToOptions_clicked()
-{
-    auto fileName = QFileDialog::getOpenFileName(this, NULL, NULL, tr("AStyle option file (*.astylerc)"));
-    ui->tbPathToOptions->setText(fileName);
+void MainWindow::keyPressEvent(QKeyEvent *event) {
+    int key = event->key();
+    if(key == Qt::Key_Delete) {
+        ui->listFiles->currentItem()->~QListWidgetItem();
+    }
 }
+
