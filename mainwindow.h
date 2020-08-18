@@ -5,6 +5,8 @@
 #include <QFileDialog>
 #include <QStringListModel>
 #include <QProcess>
+#include <QMessageBox>
+#include <QDebug>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -23,6 +25,8 @@ class MainWindow : public QMainWindow {
         void on_btPath_clicked();
 
         void on_pbFormat_clicked();
+
+        void on_pbPathToOptions_clicked();
 
     private:
         Ui::MainWindow *ui;
