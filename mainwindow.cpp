@@ -25,10 +25,7 @@ void MainWindow::on_btPath_clicked() {
 
 void MainWindow::on_pbFormat_clicked() {
     if (ui->listFiles->count() != 0) {
-
-        QString pathToOptions = "debug/data/formatCodeVNIIA.astylerc ";
-
-
+        QString pathToOptions = "data/formatCodeVNIIA.astylerc ";
         for (int i = 0; i < ui->listFiles->count(); i++) {
             ui->listFiles->setCurrentRow(i);
             QString  command("powershell.exe");
