@@ -3,6 +3,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
+    setting = new SettingForm();
 }
 
 MainWindow::~MainWindow(){
@@ -63,9 +64,7 @@ void MainWindow::on_pbRefresh_clicked(){
     }
 }
 void MainWindow::on_action_3_triggered(){
-    SettingForm settings;
-    settings.show();
-    this->close();
+    setting->show();
 }
 
 void MainWindow::on_action_4_triggered(){

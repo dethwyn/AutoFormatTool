@@ -34,6 +34,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    SettingForm *setting;
 
 protected:
     virtual void keyPressEvent(QKeyEvent *event);
