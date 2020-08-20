@@ -1,9 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow){
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
 }
 
@@ -64,12 +62,12 @@ void MainWindow::on_pbRefresh_clicked(){
         ui->listFiles->addItem(item);
     }
 }
-void MainWindow::on_action_3_triggered()
-{
-
+void MainWindow::on_action_3_triggered(){
+    SettingForm settings;
+    settings.show();
+    this->close();
 }
 
-void MainWindow::on_action_4_triggered()
-{
+void MainWindow::on_action_4_triggered(){
     this->close();
 }
