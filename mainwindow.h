@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "settingform.h"
+
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QStringListModel>
@@ -32,6 +34,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    SettingForm *setting;
 
 protected:
     virtual void keyPressEvent(QKeyEvent *event);
