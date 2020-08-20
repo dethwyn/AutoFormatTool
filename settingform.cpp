@@ -60,11 +60,11 @@ void SettingForm::on_pushButton_4_clicked(){
             iniFile.write(item.toUtf8());
         }
     }
-    qDebug() << config;
     iniFile.close();
 }
 
 void SettingForm::on_pushButton_3_clicked(){
+    on_pushButton_4_clicked();
     this->close();
 }
 
