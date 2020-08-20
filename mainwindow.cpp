@@ -1,10 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow){
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
+    setting = new SettingForm();
 }
 
 MainWindow::~MainWindow(){
@@ -25,8 +24,22 @@ void MainWindow::on_btPath_clicked(){
 
 void MainWindow::on_pbFormat_clicked(){
     if(ui->listFiles->count() != 0){
-        QString uncrustifyPath = "C:\\dev\\Uncrustify\\uncrustify.exe";
-        QString uncrustifyConfigPath = "C:\\dev\\Uncrustify\\cfg\\vniia.cfg";
+        QString uncrustifyPath = setting->pathToUC;
+        QString uncrustifyConfigPath = setting->pathToCfg;
+        QFile UC(uncrustifyPath);
+        QFile UCcfg(uncrustifyConfigPath);
+        if(!UC.exists()){
+            QMessageBox mbNotFoundUC;
+            mbNotFoundUC.setText("Не найден файл uncrustify.exe, проверьте настройки");
+            mbNotFoundUC.exec();
+            return;
+        }
+        if(!UCcfg.exists()){
+            QMessageBox mbNotFoundUC;
+            mbNotFoundUC.setText("Не найден файл конфигурации, проверьте настройки");
+            mbNotFoundUC.exec();
+            return;
+        }
         // QString pathToOptions = "data/formatCodeVNIIA.astylerc ";
         for(int i = 0; i < ui->listFiles->count(); i++){
             ui->listFiles->setCurrentRow(i);
@@ -64,12 +77,10 @@ void MainWindow::on_pbRefresh_clicked(){
         ui->listFiles->addItem(item);
     }
 }
-void MainWindow::on_action_3_triggered()
-{
-
+void MainWindow::on_action_3_triggered(){
+    setting->show();
 }
 
-void MainWindow::on_action_4_triggered()
-{
+void MainWindow::on_action_4_triggered(){
     this->close();
 }
