@@ -8,9 +8,7 @@
 #include <QStringListModel>
 #include <QProcess>
 #include <QMessageBox>
-#include <QDebug>
 #include <QKeyEvent>
-#include <QMenuBar>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -26,16 +24,15 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_btPath_clicked();
-    void on_pbFormat_clicked();
-    void on_pbRefresh_clicked();
-    void on_action_3_triggered();
-    void on_action_4_triggered();
+    void on_menuExit_triggered();
+    void on_menuSettings_triggered();
+    void on_bPath_clicked();
+    void on_bFormat_clicked();
+    void on_bRefresh_clicked();
 
 private:
     Ui::MainWindow *ui;
     SettingForm *setting;
-
 protected:
     virtual void keyPressEvent(QKeyEvent *event);
 };

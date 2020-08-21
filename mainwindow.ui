@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>510</width>
-    <height>330</height>
+    <height>335</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,7 +40,7 @@
       <number>5</number>
      </property>
      <item>
-      <widget class="QPushButton" name="btPath">
+      <widget class="QPushButton" name="bPath">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -97,7 +97,7 @@
       <number>5</number>
      </property>
      <item>
-      <widget class="QPushButton" name="pbRefresh">
+      <widget class="QPushButton" name="bRefresh">
        <property name="text">
         <string>Обновить</string>
        </property>
@@ -107,12 +107,19 @@
       <widget class="QListWidget" name="listFiles"/>
      </item>
      <item>
-      <widget class="QPushButton" name="pbFormat">
+      <widget class="QPushButton" name="bFormat">
        <property name="enabled">
         <bool>true</bool>
        </property>
        <property name="text">
         <string>Форматировать</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QProgressBar" name="progressBar">
+       <property name="value">
+        <number>0</number>
        </property>
       </widget>
      </item>
@@ -132,8 +139,8 @@
     <property name="title">
      <string>Файл</string>
     </property>
-    <addaction name="action_3"/>
-    <addaction name="action_4"/>
+    <addaction name="menuSettings"/>
+    <addaction name="menuExit"/>
    </widget>
    <addaction name="menu"/>
   </widget>
@@ -147,12 +154,12 @@
     <string>Закрыть</string>
    </property>
   </action>
-  <action name="action_3">
+  <action name="menuSettings">
    <property name="text">
     <string>Настройки</string>
    </property>
   </action>
-  <action name="action_4">
+  <action name="menuExit">
    <property name="text">
     <string>Выход</string>
    </property>

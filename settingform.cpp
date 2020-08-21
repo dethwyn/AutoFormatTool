@@ -32,14 +32,22 @@ SettingForm::~SettingForm(){
     delete ui;
 }
 
-void SettingForm::on_pushButton_clicked(){
+void SettingForm::on_tbPathToUC_textChanged(const QString &arg1){
+    pathToUC = arg1;
+}
+
+void SettingForm::on_tbPathToCfgUC_textChanged(const QString &arg1){
+    pathToCfg = arg1;
+}
+
+void SettingForm::on_bOpenPathUC_clicked(){
     auto pathToUC = QFileDialog::getOpenFileName(this, tr("Open Uncrustify.exe"), "*/", tr("Uncrustify (*.exe)"));
     if(pathToUC != ""){
         ui->tbPathToUC->setText(pathToUC);
     }
 }
 
-void SettingForm::on_pushButton_2_clicked(){
+void SettingForm::on_bOpenPathCfgUC_clicked(){
     auto pathToCfgUC =
             QFileDialog::getOpenFileName(this, tr("Open uncrustify config file"), "*/",
             tr("Uncrustify config (*.cfg)"));
@@ -48,7 +56,7 @@ void SettingForm::on_pushButton_2_clicked(){
     }
 }
 
-void SettingForm::on_pushButton_4_clicked(){
+void SettingForm::on_bSaveSettings_clicked(){
     QString pathToUC = ui->tbPathToUC->text();
     QString pathToCfg = ui->tbPathToCfgUC->text();
     QStringList config;
@@ -63,17 +71,7 @@ void SettingForm::on_pushButton_4_clicked(){
     iniFile.close();
 }
 
-void SettingForm::on_pushButton_3_clicked(){
-    on_pushButton_4_clicked();
+void SettingForm::on_bCloseSettingsWindow_clicked(){
+    on_bSaveSettings_clicked();
     this->close();
-}
-
-void SettingForm::on_tbPathToUC_textChanged(const QString &arg1)
-{
-    pathToUC = arg1;
-}
-
-void SettingForm::on_tbPathToCfgUC_textChanged(const QString &arg1)
-{
-    pathToCfg = arg1;
 }

@@ -10,7 +10,22 @@ MainWindow::~MainWindow(){
     delete ui;
 }
 
-void MainWindow::on_btPath_clicked(){
+void MainWindow::keyPressEvent(QKeyEvent *event){
+    int key = event->key();
+    if(key == Qt::Key_Delete){
+        ui->listFiles->currentItem()->~QListWidgetItem();
+    }
+}
+
+void MainWindow::on_menuExit_triggered(){
+    this->close();
+}
+
+void MainWindow::on_menuSettings_triggered(){
+    setting->show();
+}
+
+void MainWindow::on_bPath_clicked(){
     auto path = QFileDialog::getExistingDirectory();
     ui->tbPath->setText(path);
     QDir dir;
@@ -22,7 +37,7 @@ void MainWindow::on_btPath_clicked(){
     }
 }
 
-void MainWindow::on_pbFormat_clicked(){
+void MainWindow::on_bFormat_clicked(){
     if(ui->listFiles->count() != 0){
         QString uncrustifyPath = setting->pathToUC;
         QString uncrustifyConfigPath = setting->pathToCfg;
@@ -32,26 +47,33 @@ void MainWindow::on_pbFormat_clicked(){
             QMessageBox mbNotFoundUC;
             mbNotFoundUC.setText("Не найден файл uncrustify.exe, проверьте настройки");
             mbNotFoundUC.exec();
+            setting->show();
             return;
         }
         if(!UCcfg.exists()){
             QMessageBox mbNotFoundUC;
             mbNotFoundUC.setText("Не найден файл конфигурации, проверьте настройки");
             mbNotFoundUC.exec();
+            setting->show();
             return;
         }
-        // QString pathToOptions = "data/formatCodeVNIIA.astylerc ";
+        QMessageBox final;
+        final.setText("Форматирование завершено");
+        double progresBarStep = 100 / ui->listFiles->count();
+        double currentProgressBarValue = 0;
+        ui->progressBar->setValue(currentProgressBarValue);
         for(int i = 0; i < ui->listFiles->count(); i++){
             ui->listFiles->setCurrentRow(i);
             QString command("powershell.exe");
             QString pathToFile(ui->tbPath->text() + "/" + ui->listFiles->currentItem()->text());
             QStringList params;
-            // params.append("astyle --options=" + pathToOptions + pathToFile);
-            QString param = "%1 -c %2 -f %3 -o %3";
+            QString param = "%1 -c %2 -f %3 -o %3 --no-backup";
             params.append(param.arg(uncrustifyPath).arg(uncrustifyConfigPath).arg(pathToFile));
-            qDebug() << params;
-            QProcess::startDetached(command, params);
+            QProcess::execute(command, params);
+            currentProgressBarValue += progresBarStep;
+            ui->progressBar->setValue(currentProgressBarValue);
         }
+        final.exec();
     }
     else{
         QMessageBox msgBox;
@@ -60,14 +82,7 @@ void MainWindow::on_pbFormat_clicked(){
     }
 }
 
-void MainWindow::keyPressEvent(QKeyEvent *event){
-    int key = event->key();
-    if(key == Qt::Key_Delete){
-        ui->listFiles->currentItem()->~QListWidgetItem();
-    }
-}
-
-void MainWindow::on_pbRefresh_clicked(){
+void MainWindow::on_bRefresh_clicked(){
     ui->listFiles->clear();
     QDir dir;
     dir.setPath(ui->tbPath->text());
@@ -76,11 +91,4 @@ void MainWindow::on_pbRefresh_clicked(){
     foreach(auto item, files){
         ui->listFiles->addItem(item);
     }
-}
-void MainWindow::on_action_3_triggered(){
-    setting->show();
-}
-
-void MainWindow::on_action_4_triggered(){
-    this->close();
 }
