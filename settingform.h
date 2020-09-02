@@ -9,8 +9,7 @@ namespace Ui {
     class SettingForm;
 }
 
-class SettingForm : public QWidget
-{
+class SettingForm : public QWidget {
     Q_OBJECT
 
 public:
