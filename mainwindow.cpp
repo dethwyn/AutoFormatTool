@@ -26,6 +26,7 @@ void MainWindow::on_menuSettings_triggered(){
 }
 
 void MainWindow::on_bPath_clicked(){
+    ui->listFiles->clear();
     auto path = QFileDialog::getExistingDirectory();
     ui->tbPath->setText(path);
     QDir dir;
