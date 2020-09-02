@@ -1,31 +1,31 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     setting = new SettingForm();
 }
 
-MainWindow::~MainWindow(){
+MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::keyPressEvent(QKeyEvent *event){
+void MainWindow::keyPressEvent(QKeyEvent *event) {
     int key = event->key();
-    if(key == Qt::Key_Delete){
+    if(key == Qt::Key_Delete) {
         ui->listFiles->currentItem()->~QListWidgetItem();
     }
 }
 
-void MainWindow::on_menuExit_triggered(){
+void MainWindow::on_menuExit_triggered() {
     this->close();
 }
 
-void MainWindow::on_menuSettings_triggered(){
+void MainWindow::on_menuSettings_triggered() {
     setting->show();
 }
 
-void MainWindow::on_bPath_clicked(){
+void MainWindow::on_bPath_clicked() {
     ui->listFiles->clear();
     auto path = QFileDialog::getExistingDirectory();
     ui->tbPath->setText(path);
@@ -33,25 +33,25 @@ void MainWindow::on_bPath_clicked(){
     dir.setPath(path);
     dir.setNameFilters(QStringList() << "*.cpp" << "*.c" << "*.h" << "*.hpp");
     QStringList files = dir.entryList();
-    foreach(auto item, files){
+    foreach(auto item, files) {
         ui->listFiles->addItem(item);
     }
 }
 
-void MainWindow::on_bFormat_clicked(){
-    if(ui->listFiles->count() != 0){
+void MainWindow::on_bFormat_clicked() {
+    if(ui->listFiles->count() != 0) {
         QString uncrustifyPath = setting->pathToUC;
         QString uncrustifyConfigPath = setting->pathToCfg;
         QFile UC(uncrustifyPath);
         QFile UCcfg(uncrustifyConfigPath);
-        if(!UC.exists()){
+        if(!UC.exists()) {
             QMessageBox mbNotFoundUC;
             mbNotFoundUC.setText("Не найден файл uncrustify.exe, проверьте настройки");
             mbNotFoundUC.exec();
             setting->show();
             return;
         }
-        if(!UCcfg.exists()){
+        if(!UCcfg.exists()) {
             QMessageBox mbNotFoundUC;
             mbNotFoundUC.setText("Не найден файл конфигурации, проверьте настройки");
             mbNotFoundUC.exec();
@@ -63,7 +63,7 @@ void MainWindow::on_bFormat_clicked(){
         double progresBarStep = 100 / ui->listFiles->count();
         double currentProgressBarValue = 0;
         ui->progressBar->setValue(currentProgressBarValue);
-        for(int i = 0; i < ui->listFiles->count(); i++){
+        for(int i = 0; i < ui->listFiles->count(); i++) {
             ui->listFiles->setCurrentRow(i);
             QString command("powershell.exe");
             QString pathToFile(ui->tbPath->text() + "/" + ui->listFiles->currentItem()->text());
@@ -75,21 +75,20 @@ void MainWindow::on_bFormat_clicked(){
             ui->progressBar->setValue(currentProgressBarValue);
         }
         final.exec();
-    }
-    else{
+    } else   {
         QMessageBox msgBox;
         msgBox.setText("Не выбран ни один файл с исходным кодом!");
         msgBox.exec();
     }
 }
 
-void MainWindow::on_bRefresh_clicked(){
+void MainWindow::on_bRefresh_clicked() {
     ui->listFiles->clear();
     QDir dir;
     dir.setPath(ui->tbPath->text());
     dir.setNameFilters(QStringList() << "*.cpp" << "*.c" << "*.h" << "*.hpp");
     QStringList files = dir.entryList();
-    foreach(auto item, files){
+    foreach(auto item, files) {
         ui->listFiles->addItem(item);
     }
 }

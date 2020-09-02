@@ -3,6 +3,7 @@
 
 #include "settingform.h"
 
+#include <QDebug>
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QStringListModel>
