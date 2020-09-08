@@ -1,8 +1,6 @@
 #include "nyancatprogressbar.h"
 
 NyanCatProgressBar::NyanCatProgressBar(QWidget *parent) {
-    setAlignment(Qt::AlignLeft);
-    setFormat("%p%");
 }
 
 void NyanCatProgressBar::paintEvent(QPaintEvent *) {
@@ -17,7 +15,7 @@ void NyanCatProgressBar::paintEvent(QPaintEvent *) {
     QColor colors[] = {k_red, k_orange, k_yellow, k_green, k_lightBlue, k_purple};
     int hRect = height() / 6;
     for(int i = 0; i < 6; i++) {
-        if(val < 90) {
+        if(val < 100) {
             painter.setPen(colors[i]);
             painter.setBrush(QBrush(colors[i]));
             painter.drawRect(pos_draw - 1, i * hRect, pos, hRect);
