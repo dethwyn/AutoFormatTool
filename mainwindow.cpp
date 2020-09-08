@@ -93,3 +93,6 @@ void MainWindow::on_bRefresh_clicked() {
         ui->listFiles->addItem(item);
     }
 }
+
+void MainWindow::on_tbPath_textChanged(const QString &arg1) {
+}

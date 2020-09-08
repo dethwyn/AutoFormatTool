@@ -32,6 +32,8 @@ private slots:
     void on_bFormat_clicked();
     void on_bRefresh_clicked();
 
+    void on_tbPath_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     SettingForm *setting;
