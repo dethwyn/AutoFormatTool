@@ -6,7 +6,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     setting = new SettingForm();
     nc = new NyanCatProgressBar();
     ui->verticalLayout->addWidget(nc);
-    nc->setValue(50);
 }
 
 MainWindow::~MainWindow() {
