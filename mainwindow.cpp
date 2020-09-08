@@ -93,3 +93,16 @@ void MainWindow::on_bRefresh_clicked() {
         ui->listFiles->addItem(item);
     }
 }
+
+void MainWindow::on_tbPath_textChanged(const QString &arg1) {
+    QDir dir;
+    if(dir.exists(arg1)) {
+        ui->listFiles->clear();
+        dir.setPath(arg1);
+        dir.setNameFilters(QStringList() << "*.cpp" << "*.c" << "*.h" << "*.hpp");
+        QStringList files = dir.entryList();
+        foreach(auto item, files) {
+            ui->listFiles->addItem(item);
+        }
+    }
+}
