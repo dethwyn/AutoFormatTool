@@ -9,6 +9,7 @@
 #include <QStyle>
 #include <QPen>
 #include <QColor>
+#include <QDebug>
 
 const auto k_red = QColor::fromRgb(255, 0, 0);
 const auto k_orange = QColor::fromRgb(255, 160, 0);

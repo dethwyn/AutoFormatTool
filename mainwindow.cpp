@@ -5,10 +5,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     setting = new SettingForm();
     nc = new NyanCatProgressBar();
-    testBt = new QPushButton();
     ui->verticalLayout->addWidget(nc);
-    ui->verticalLayout->addWidget(testBt);
-    connect(testBt, &QPushButton::clicked, this, &MainWindow::testPb);
+    nc->setValue(50);
 }
 
 MainWindow::~MainWindow() {
@@ -20,10 +18,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event) {
     if((key == Qt::Key_Delete) && (ui->listFiles->count() > 0)) {
         ui->listFiles->currentItem()->~QListWidgetItem();
     }
-}
-
-void MainWindow::testPb() {
-    nc->setValue(100);
 }
 
 void MainWindow::on_menuExit_triggered() {
@@ -64,7 +58,8 @@ void MainWindow::on_bFormat_clicked() {
         final.setText("Форматирование завершено");
         double progresBarStep = round(100.0 / ui->listFiles->count());
         double currentProgressBarValue = 0;
-        ui->progressBar->setValue(static_cast<int>(currentProgressBarValue));
+        nc->setValue(static_cast<int>(currentProgressBarValue));
+        //ui->progressBar->setValue();
         while(ui->listFiles->count() > 0) {
             QString command("powershell.exe");
             QString pathToFile(ui->tbPath->text() + "/" + ui->listFiles->takeItem(0)->text());
@@ -74,9 +69,11 @@ void MainWindow::on_bFormat_clicked() {
             int result = QProcess::execute(command, params);
             qDebug() << result;
             currentProgressBarValue += progresBarStep;
-            ui->progressBar->setValue(static_cast<int>(currentProgressBarValue));
+            nc->setValue(static_cast<int>(currentProgressBarValue));
+            // ui->progressBar->setValue(static_cast<int>(currentProgressBarValue));
         }
-        ui->progressBar->setValue(100);
+        nc->setValue(100);
+        //ui->progressBar->setValue(100);
         final.exec();
     } else {
         QMessageBox msgBox;

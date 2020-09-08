@@ -42,8 +42,5 @@ private:
 
 protected:
     virtual void keyPressEvent(QKeyEvent *event);
-
-public slots:
-    void testPb();
 };
 #endif // MAINWINDOW_H
