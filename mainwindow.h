@@ -10,6 +10,7 @@
 #include <QProcess>
 #include <QMessageBox>
 #include <QKeyEvent>
+#include <QtMath>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

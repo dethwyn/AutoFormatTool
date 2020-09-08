@@ -12,7 +12,7 @@ MainWindow::~MainWindow() {
 
 void MainWindow::keyPressEvent(QKeyEvent *event) {
     int key = event->key();
-    if(key == Qt::Key_Delete) {
+    if((key == Qt::Key_Delete) && (ui->listFiles->count() > 0)) {
         ui->listFiles->currentItem()->~QListWidgetItem();
     }
 }
@@ -60,9 +60,9 @@ void MainWindow::on_bFormat_clicked() {
         }
         QMessageBox final;
         final.setText("Форматирование завершено");
-        double progresBarStep = 100 / ui->listFiles->count();
+        double progresBarStep = round(100.0 / ui->listFiles->count());
         double currentProgressBarValue = 0;
-        ui->progressBar->setValue(currentProgressBarValue);
+        ui->progressBar->setValue(static_cast<int>(currentProgressBarValue));
         for(int i = 0; i < ui->listFiles->count(); i++) {
             ui->listFiles->setCurrentRow(i);
             QString command("powershell.exe");
@@ -72,10 +72,11 @@ void MainWindow::on_bFormat_clicked() {
             params.append(param.arg(uncrustifyPath).arg(uncrustifyConfigPath).arg(pathToFile));
             QProcess::execute(command, params);
             currentProgressBarValue += progresBarStep;
-            ui->progressBar->setValue(currentProgressBarValue);
+            ui->progressBar->setValue(static_cast<int>(currentProgressBarValue));
         }
+        ui->progressBar->setValue(100);
         final.exec();
-    } else   {
+    } else {
         QMessageBox msgBox;
         msgBox.setText("Не выбран ни один файл с исходным кодом!");
         msgBox.exec();
