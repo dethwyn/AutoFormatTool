@@ -31,4 +31,6 @@ void NyanCatProgressBar::paintEvent(QPaintEvent *) {
     } else {
         painter.drawImage(pos - 40, 0, dest);
     }
+
+    text();
 }
