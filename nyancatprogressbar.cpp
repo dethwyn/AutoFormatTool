@@ -28,11 +28,9 @@ void NyanCatProgressBar::paintEvent(QPaintEvent *) {
                     QStyle::sliderPositionFromValue(minimum(), maximum(), val - 5, width()), hRect);
         }
     }
-    if(val < 100) {
+    if(val < 100 && val > 0) {
         painter.drawImage(pos - 20, 0, dest);
     } else {
         painter.drawImage(pos - 40, 0, dest);
     }
-
-    text();
 }
