@@ -68,6 +68,7 @@ void SettingForm::on_bSaveSettings_clicked() {
         }
     }
     iniFile.close();
+    this->close();
 }
 
 void SettingForm::on_bCloseSettingsWindow_clicked() {
