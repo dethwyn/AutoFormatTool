@@ -63,14 +63,14 @@ void MainWindow::on_bFormat_clicked() {
         double progresBarStep = round(100.0 / ui->listFiles->count());
         double currentProgressBarValue = 0;
         ui->progressBar->setValue(static_cast<int>(currentProgressBarValue));
-        for(int i = 0; i < ui->listFiles->count(); i++) {
-            ui->listFiles->setCurrentRow(i);
+        while(ui->listFiles->count() > 0){
             QString command("powershell.exe");
-            QString pathToFile(ui->tbPath->text() + "/" + ui->listFiles->currentItem()->text());
+            QString pathToFile(ui->tbPath->text() + "/" + ui->listFiles->takeItem(0)->text());
             QStringList params;
             QString param = "%1 -c %2 -f %3 -o %3 --no-backup";
             params.append(param.arg(uncrustifyPath).arg(uncrustifyConfigPath).arg(pathToFile));
-            QProcess::execute(command, params);
+            int result = QProcess::execute(command, params);
+            qDebug() << result;
             currentProgressBarValue += progresBarStep;
             ui->progressBar->setValue(static_cast<int>(currentProgressBarValue));
         }
