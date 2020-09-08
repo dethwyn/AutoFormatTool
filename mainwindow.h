@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "settingform.h"
+#include "nyancatprogressbar.h"
 
 #include <QDebug>
 #include <QMainWindow>
@@ -31,12 +32,14 @@ private slots:
     void on_bPath_clicked();
     void on_bFormat_clicked();
     void on_bRefresh_clicked();
-
     void on_tbPath_textChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;
     SettingForm *setting;
+    NyanCatProgressBar *nc;
+    QPushButton *testBt;
+
 protected:
     virtual void keyPressEvent(QKeyEvent *event);
 };

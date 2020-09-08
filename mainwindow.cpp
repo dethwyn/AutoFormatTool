@@ -4,6 +4,8 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     setting = new SettingForm();
+    nc = new NyanCatProgressBar();
+    ui->verticalLayout->addWidget(nc);
 }
 
 MainWindow::~MainWindow() {
@@ -55,7 +57,8 @@ void MainWindow::on_bFormat_clicked() {
         final.setText("Форматирование завершено");
         double progresBarStep = round(100.0 / ui->listFiles->count());
         double currentProgressBarValue = 0;
-        ui->progressBar->setValue(static_cast<int>(currentProgressBarValue));
+        nc->setValue(static_cast<int>(currentProgressBarValue));
+        //ui->progressBar->setValue();
         while(ui->listFiles->count() > 0) {
             QString command("powershell.exe");
             QString pathToFile(ui->tbPath->text() + "/" + ui->listFiles->takeItem(0)->text());
@@ -65,9 +68,11 @@ void MainWindow::on_bFormat_clicked() {
             int result = QProcess::execute(command, params);
             qDebug() << result;
             currentProgressBarValue += progresBarStep;
-            ui->progressBar->setValue(static_cast<int>(currentProgressBarValue));
+            nc->setValue(static_cast<int>(currentProgressBarValue));
+            // ui->progressBar->setValue(static_cast<int>(currentProgressBarValue));
         }
-        ui->progressBar->setValue(100);
+        nc->setValue(100);
+        //ui->progressBar->setValue(100);
         final.exec();
     } else {
         QMessageBox msgBox;
