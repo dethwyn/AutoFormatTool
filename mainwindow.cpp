@@ -29,13 +29,6 @@ void MainWindow::on_bPath_clicked() {
     ui->listFiles->clear();
     auto path = QFileDialog::getExistingDirectory();
     ui->tbPath->setText(path);
-    QDir dir;
-    dir.setPath(path);
-    dir.setNameFilters(QStringList() << "*.cpp" << "*.c" << "*.h" << "*.hpp");
-    QStringList files = dir.entryList();
-    foreach(auto item, files) {
-        ui->listFiles->addItem(item);
-    }
 }
 
 void MainWindow::on_bFormat_clicked() {
