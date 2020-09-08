@@ -4,6 +4,11 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     setting = new SettingForm();
+    nc = new NyanCatProgressBar();
+    testBt = new QPushButton();
+    ui->verticalLayout->addWidget(nc);
+    ui->verticalLayout->addWidget(testBt);
+    connect(testBt, &QPushButton::clicked, this, &MainWindow::testPb);
 }
 
 MainWindow::~MainWindow() {
@@ -15,6 +20,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event) {
     if((key == Qt::Key_Delete) && (ui->listFiles->count() > 0)) {
         ui->listFiles->currentItem()->~QListWidgetItem();
     }
+}
+
+void MainWindow::testPb() {
+    nc->setValue(100);
 }
 
 void MainWindow::on_menuExit_triggered() {

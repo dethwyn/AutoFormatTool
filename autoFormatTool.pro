@@ -18,11 +18,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    settingform.cpp
+    settingform.cpp \
+    nyancatprogressbar.cpp
 
 HEADERS += \
     mainwindow.h \
-    settingform.h
+    settingform.h \
+    nyancatprogressbar.h
 
 FORMS += \
     mainwindow.ui \
