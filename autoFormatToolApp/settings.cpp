@@ -1,14 +1,22 @@
 #include "settings.h"
 
-Settings::Settings(QObject *parent) : QObject(parent) {
+Settings::Settings(QObject *parent) {
+    loadSettings();
 }
 
 void Settings::loadSettings() {
+    QFile file("settings.ini");
+    QStringList strings;
+    file.open(QFile::ReadOnly);
+    while(file.atEnd()){
+        strings.append(file.readLine());
+    }
+
 }
 
 void Settings::updateSettings(QString pUC, QString pCFG, int pbType, QString pLast) {
-    Settings::pathUC = pUC;
-    Settings::pathCFG = pCFG;
-    Settings::progressBarType = pbType;
-    Settings::pathLastSource = pLast;
+    pathUC = pUC;
+    pathCFG = pCFG;
+    progressBarType = pbType;
+    pathLastSource = pLast;
 }

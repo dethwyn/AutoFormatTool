@@ -2,9 +2,11 @@
 
 UserActions::UserActions(QObject *parent) : QObject(parent) {
     auto instance = &State::getInstance();
-    Settings::loadSettings();
-    instance->setLinePathUcText(Settings::pathUC);
-    instance->setLinePathCfgText(Settings::pathCFG);
+    settings = new Settings();
+    instance->setLinePathUcText(settings->pathUC);
+    instance->setLinePathCfgText(settings->pathCFG);
+    instance->setLinePathText(settings->pathLastSource);
+    instance->setProgressBarType(settings->progressBarType);
     emit runRenderGUI();
 }
 
@@ -107,7 +109,7 @@ void UserActions::bSaveSettings_clicked() {
     auto pathCfg = instance->getLinePathCfgText();
     auto lastPath = "";
     auto pbType = instance->getProgressBarType();
-    Settings::updateSettings(pathUc, pathCfg, pbType, lastPath);
+    settings->updateSettings(pathUc, pathCfg, pbType, lastPath);
     emit runRenderGUI();
 }
 

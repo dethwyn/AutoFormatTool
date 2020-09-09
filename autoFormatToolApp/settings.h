@@ -2,19 +2,17 @@
 #define SETTINGS_H
 
 #include <QObject>
+#include <QFile>
 
-class Settings : public QObject {
-    Q_OBJECT
+class Settings {
 public:
     explicit Settings(QObject *parent = nullptr);
-    static QString pathUC;
-    static QString pathCFG;
-    static int progressBarType;
-    static QString pathLastSource;
-    static void loadSettings();
-    static void updateSettings(QString pUC = "", QString pCFG = "", int pbType = 0, QString pLast = "");
-signals:
-public slots:
+    QString pathUC;
+    QString pathCFG;
+    int progressBarType;
+    QString pathLastSource;
+    void loadSettings();
+    void updateSettings(QString pUC = "", QString pCFG = "", int pbType = 0, QString pLast = "");
 };
 
 #endif // SETTINGS_H

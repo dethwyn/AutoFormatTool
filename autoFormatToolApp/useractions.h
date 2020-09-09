@@ -8,11 +8,13 @@
 #include <QFileDialog>
 #include <QtMath>
 #include <QProcess>
+#include <QSettings>
 
 class UserActions : public QObject {
     Q_OBJECT
 public:
     explicit UserActions(QObject *parent = nullptr);
+    Settings *settings;
     // Методы основного окна
     void menuSettings_triggered();
     void bPath_clicked(QString path);
