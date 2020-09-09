@@ -44,8 +44,10 @@ private:
     SettingForm *settingForm;
     QProgressBar *progressBar;
     QPushButton *testBt;
-    UserActions userActions;
+    UserActions *userActions;
+    QFileDialog *selectDirDialog;
     void connectSlots();
+    void configureUi();
 
 protected:
     virtual void keyPressEvent(QKeyEvent *event);

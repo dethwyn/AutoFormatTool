@@ -28,12 +28,16 @@ void State::setButtonRefreshText(const QString &text) {
     buttonRefreshText = text;
 }
 
-void State::setListFilesStringList(const QStringList &list) {
+void State::setListFilesStringList(QStringList *list) {
     listFilesStringList = list;
 }
 
 void State::addItemListFiles(const QString &item) {
-    listFilesStringList.append(item);
+    listFilesStringList->append(item);
+}
+
+void State::deleteItemListFiles(int pos) {
+    listFilesStringList->removeAt(pos);
 }
 
 void State::setButtonFormatText(const QString &text) {

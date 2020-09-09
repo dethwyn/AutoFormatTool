@@ -44,7 +44,8 @@ State::State() {
     linePathText = "";
     labelPathText = "Путь до исходников";
     buttonRefreshText = "Обновить";
-    listFilesStringList.clear();
+    listFilesStringList = new QStringList();
+    listFilesStringList->clear();
     buttonFormatText = "Форматировать";
     progressBarValue = 0;
     progressBarType = 0;

@@ -13,7 +13,7 @@ public:
     explicit UserActions(QObject *parent = nullptr);
     Settings userSettings;
     void menuSettings_triggered();
-    void bPath_clicked();
+    void bPath_clicked(QString path);
     void bFormat_clicked();
     void bRefresh_clicked();
     void tbPath_textChanged(const QString &arg1);

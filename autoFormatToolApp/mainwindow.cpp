@@ -2,15 +2,8 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
-    ui->setupUi(this);
-    settingForm = new SettingForm();
-    State *stateInstance = &State::getInstance();
-    if(stateInstance->getProgressBarType() == 1) {
-        progressBar = new NyanCatProgressBar();
-    } else {
-        progressBar = new QProgressBar();
-    }
-    ui->verticalLayout->addWidget(progressBar);
+    configureUi();
+    connectSlots();
     renderGUI();
 }
 
@@ -19,23 +12,25 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::renderGUI() {
-    State *stateInstance = &State::getInstance();
-    ui->menuSettings->setText(stateInstance->getMenuSettingText());
-    ui->menuExit->setText(stateInstance->getMenuExitText());
-    ui->menu->setTitle(stateInstance->getMenuFileText());
-    ui->bPath->setText(stateInstance->getButtonBrowseText());
-    ui->bFormat->setText(stateInstance->getButtonFormatText());
-    ui->bRefresh->setText(stateInstance->getButtonRefreshText());
-    ui->tbPath->setText(stateInstance->getLinePathText());
-    ui->lbPathSource->setText(stateInstance->getLabelPathText()); \
-
+    auto instance = &State::getInstance();
+    ui->menuSettings->setText(instance->getMenuSettingText());
+    ui->menuExit->setText(instance->getMenuExitText());
+    ui->menu->setTitle(instance->getMenuFileText());
+    ui->bPath->setText(instance->getButtonBrowseText());
+    ui->bFormat->setText(instance->getButtonFormatText());
+    ui->bRefresh->setText(instance->getButtonRefreshText());
+    ui->tbPath->setText(instance->getLinePathText());
+    ui->lbPathSource->setText(instance->getLabelPathText());
+    ui->listFiles->clear();
+    foreach(auto item, *instance->getListFilesStringList()) {
+        ui->listFiles->addItem(item);
+    }
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event) {
     int key = event->key();
-    if(key == Qt::Key_Delete /* && (ui->listFiles->count() > 0)*/) {
-        // ui->listFiles->currentItem()->~QListWidgetItem();
-        userActions.deleteFile(ui->listFiles->currentRow());
+    if(key == Qt::Key_Delete) {
+        userActions->deleteFile(ui->listFiles->currentRow());
     }
 }
 
@@ -48,14 +43,13 @@ void MainWindow::on_menuSettings_triggered() {
 }
 
 void MainWindow::on_bPath_clicked() {
-//    ui->listFiles->clear();
-//    auto path = QFileDialog::getExistingDirectory();
-//    ui->tbPath->setText(path);
-    userActions.bPath_clicked();
+    if(selectDirDialog->exec()) {
+        userActions->bPath_clicked(selectDirDialog->selectedFiles()[0]);
+    }
 }
 
 void MainWindow::on_bFormat_clicked() {
-    userActions.bFormat_clicked();
+    userActions->bFormat_clicked();
 //    if(ui->listFiles->count() != 0) {
 //        QString uncrustifyPath = settingForm->pathToUC;
 //        QString uncrustifyConfigPath = settingForm->pathToCfg;
@@ -104,7 +98,7 @@ void MainWindow::on_bFormat_clicked() {
 }
 
 void MainWindow::on_bRefresh_clicked() {
-    userActions.bRefresh_clicked();
+    userActions->bRefresh_clicked();
 //    ui->listFiles->clear();
 //    QDir dir;
 //    dir.setPath(ui->tbPath->text());
@@ -116,7 +110,7 @@ void MainWindow::on_bRefresh_clicked() {
 }
 
 void MainWindow::on_tbPath_textChanged(const QString &arg1) {
-    userActions.tbPath_textChanged(arg1);
+    userActions->tbPath_textChanged(arg1);
 //    QDir dir;
 //    if(dir.exists(arg1)) {
 //        ui->listFiles->clear();
@@ -130,4 +124,20 @@ void MainWindow::on_tbPath_textChanged(const QString &arg1) {
 }
 
 void MainWindow::connectSlots() {
+    connect(userActions, &UserActions::runRenderGUI, this, &MainWindow::renderGUI);
+}
+
+void MainWindow::configureUi() {
+    ui->setupUi(this);
+    settingForm = new SettingForm();
+    State *stateInstance = &State::getInstance();
+    userActions = new UserActions();
+    if(stateInstance->getProgressBarType() == 1) {
+        progressBar = new NyanCatProgressBar();
+    } else {
+        progressBar = new QProgressBar();
+    }
+    ui->verticalLayout->addWidget(progressBar);
+    selectDirDialog = new QFileDialog();
+    selectDirDialog->setFileMode(QFileDialog::DirectoryOnly);
 }

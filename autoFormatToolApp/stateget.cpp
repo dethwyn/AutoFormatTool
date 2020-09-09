@@ -28,7 +28,7 @@ QString State::getButtonRefreshText() {
     return buttonRefreshText;
 }
 
-QStringList State::getListFilesStringList() {
+QStringList *State::getListFilesStringList() {
     return listFilesStringList;
 }
 
@@ -43,4 +43,3 @@ int State::getProgressBarValue() {
 int State::getProgressBarType() {
     return progressBarType;
 }
-

@@ -1,6 +1,7 @@
 #ifndef STATE_H
 #define STATE_H
 
+#include <QDebug>
 #include <QString>
 #include <QStringList>
 
@@ -30,7 +31,7 @@ private:
     QString linePathText;
     QString labelPathText;
     QString buttonRefreshText;
-    QStringList listFilesStringList;
+    QStringList *listFilesStringList;
     QString buttonFormatText;
     int progressBarValue;
     int progressBarType;
@@ -65,7 +66,7 @@ public:
     QString getLinePathText();
     QString getLabelPathText();
     QString getButtonRefreshText();
-    QStringList getListFilesStringList();
+    QStringList *getListFilesStringList();
     QString getButtonFormatText();
     int getProgressBarValue();
     int getProgressBarType();
@@ -77,8 +78,9 @@ public:
     void setLinePathText(const QString &text);
     void setLabelPathText(const QString &text);
     void setButtonRefreshText(const QString &text);
-    void setListFilesStringList(const QStringList &list);
+    void setListFilesStringList(QStringList *list);
     void addItemListFiles(const QString &item);
+    void deleteItemListFiles(int pos);
     void setButtonFormatText(const QString &text);
     void setProgressBarValue(int value);
     void setProgressBarType(int type);
