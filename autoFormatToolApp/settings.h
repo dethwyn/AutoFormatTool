@@ -7,12 +7,12 @@ class Settings : public QObject {
     Q_OBJECT
 public:
     explicit Settings(QObject *parent = nullptr);
-    QString pathUC;
-    QString pathCFG;
-    int progressBarType;
-    QString pathLastSource;
-    void loadSettings();
-    void updateSettings(QString pUC = "", QString pCFG = "", int pbType = 0, QString pLast = "");
+    static QString pathUC;
+    static QString pathCFG;
+    static int progressBarType;
+    static QString pathLastSource;
+    static void loadSettings();
+    static void updateSettings(QString pUC = "", QString pCFG = "", int pbType = 0, QString pLast = "");
 signals:
 public slots:
 };
