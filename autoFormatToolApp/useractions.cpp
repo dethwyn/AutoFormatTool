@@ -1,7 +1,11 @@
 #include "useractions.h"
 
 UserActions::UserActions(QObject *parent) : QObject(parent) {
-    userSettings = new Settings();
+    auto instance = &State::getInstance();
+    Settings::loadSettings();
+    instance->setLinePathUcText(Settings::pathUC);
+    instance->setLinePathCfgText(Settings::pathCFG);
+    emit runRenderGUI();
 }
 
 void UserActions::menuSettings_triggered() {
@@ -82,5 +86,49 @@ void UserActions::deleteFile(int pos) {
     if(instance->getListFilesStringList()->count() > 0) {
         instance->deleteItemListFiles(pos);
     }
+    emit runRenderGUI();
+}
+
+void UserActions::tbPathToUC_textChanged(const QString &arg1) {
+    auto instance = &State::getInstance();
+    instance->setLinePathUcText(arg1);
+    emit runRenderGUI();
+}
+
+void UserActions::tbPathToCfgUC_textChanged(const QString &arg1) {
+    auto instance = &State::getInstance();
+    instance->setLinePathCfgText(arg1);
+    emit runRenderGUI();
+}
+
+void UserActions::bSaveSettings_clicked() {
+    auto instance = &State::getInstance();
+    auto pathUc = instance->getLinePathUcText();
+    auto pathCfg = instance->getLinePathCfgText();
+    auto lastPath = "";
+    auto pbType = instance->getProgressBarType();
+    Settings::updateSettings(pathUc, pathCfg, pbType, lastPath);
+    emit runRenderGUI();
+}
+
+void UserActions::bOpenPathUC_clicked(const QString &path) {
+    auto instance = &State::getInstance();
+    if(path != "") {
+        instance->setLinePathUcText(path);
+    }
+    emit runRenderGUI();
+}
+
+void UserActions::bOpenPathCfgUC_clicked(const QString &path) {
+    auto instance = &State::getInstance();
+    if(path != "") {
+        instance->setLinePathCfgText(path);
+    }
+    emit runRenderGUI();
+}
+
+void UserActions::bCloseSettingsWindow_clicked() {
+    // auto instance = &State::getInstance();
+
     emit runRenderGUI();
 }
