@@ -11,7 +11,7 @@ class UserActions : public QObject {
     Q_OBJECT
 public:
     explicit UserActions(QObject *parent = nullptr);
-    Settings userSettings;
+    Settings *userSettings;
     void menuSettings_triggered();
     void bPath_clicked(QString path);
     void bFormat_clicked();
