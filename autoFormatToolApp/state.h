@@ -85,8 +85,23 @@ public:
     void setProgressBarValue(int value);
     void setProgressBarType(int type);
     // Геттеры окна настроек
-
+    QString getButtonBrowseUcText();
+    QString getLinePathUcText();
+    QString getLabelPathUcText();
+    QString getButtonBrowseCfgText();
+    QString getLabelPathCfgText();
+    QString getLinePathCfgText();
+    QString getButtonSaveText();
+    QString getButtonCloseText();
     // Сеттеры окна настроек
+    void setButtonBrowseUcText(const QString &text);
+    void setLinePathUcText(const QString &text);
+    void setLabelPathUcText(const QString &text);
+    void setButtonBrowseCfgText(const QString &text);
+    void setLabelPathCfgText(const QString &text);
+    void setLinePathCfgText(const QString &text);
+    void setButtonSaveText(const QString &text);
+    void setButtonCloseText(const QString &text);
 };
 
 #endif // STATE_H
