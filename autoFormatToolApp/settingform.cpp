@@ -1,77 +1,74 @@
 #include "settingform.h"
 #include "ui_settingform.h"
 
-SettingForm::SettingForm(QWidget *parent) :
+SettingForm::SettingForm(UserActions *ua, QWidget *parent) :
     QWidget(parent), ui(new Ui::SettingForm) {
-    ui->setupUi(this);
-    QFile iniFile("settings.ini");
-    QStringList settingStrings;
-    if((iniFile.exists() && iniFile.open(QIODevice::ReadOnly))) {
-        while(!iniFile.atEnd()) {
-            settingStrings.append(iniFile.readLine());
-        }
-    }
-    QList<QStringList> parse;
-    for(int i = 0; i < settingStrings.count(); i++) {
-        settingStrings[i].remove('\r');
-        settingStrings[i].remove('\n');
-        parse.append(settingStrings[i].split(' '));
-    }
-    foreach(auto item, parse) {
-        if(item[0] == "path_to_uncrustify") {
-            ui->tbPathToUC->setText(item[2]);
-        } else if(item[0] == "path_to_config") {
-            ui->tbPathToCfgUC->setText(item[2]);
-        }
-    }
-    iniFile.close();
+    userActions = ua;
+    createGUI();
+    connectSlots();
+    renderGUI();
 }
 
 SettingForm::~SettingForm() {
     delete ui;
 }
 
+void SettingForm::renderGUI() {
+    auto instance = &State::getInstance();
+    ui->lbUC->setText(instance->getLabelPathUcText());
+    ui->lbCFG->setText(instance->getLabelPathCfgText());
+    ui->tbPathToUC->setText(instance->getLinePathUcText());
+    ui->tbPathToCfgUC->setText(instance->getLinePathCfgText());
+    ui->bOpenPathUC->setText(instance->getButtonBrowseUcText());
+    ui->bOpenPathCfgUC->setText(instance->getButtonBrowseCfgText());
+    ui->bSaveSettings->setText(instance->getButtonSaveText());
+    ui->bCloseSettingsWindow->setText(instance->getButtonCloseText());
+}
+
+void SettingForm::showMessageBox(QString message) {
+    QMessageBox box;
+    box.setText(message);
+    box.exec();
+}
+
 void SettingForm::on_tbPathToUC_textChanged(const QString &arg1) {
-    pathToUC = arg1;
+    userActions->tbPathToUC_textChanged(arg1);
 }
 
 void SettingForm::on_tbPathToCfgUC_textChanged(const QString &arg1) {
-    pathToCfg = arg1;
+    userActions->tbPathToCfgUC_textChanged(arg1);
 }
 
 void SettingForm::on_bOpenPathUC_clicked() {
-    auto pathToUC = QFileDialog::getOpenFileName(this, tr("Open Uncrustify.exe"), "*/", tr("Uncrustify (*.exe)"));
-    if(pathToUC != "") {
-        ui->tbPathToUC->setText(pathToUC);
+    if(ucFileDialog->exec()) {
+        userActions->bOpenPathUC_clicked(ucFileDialog->selectedFiles()[0]);
     }
 }
 
 void SettingForm::on_bOpenPathCfgUC_clicked() {
-    auto pathToCfgUC =
-            QFileDialog::getOpenFileName(this, tr("Open uncrustify config file"), "*/",
-            tr("Uncrustify config (*.cfg)"));
-    if(pathToCfgUC != "") {
-        ui->tbPathToCfgUC->setText(pathToCfgUC);
+    if(cfgFileDialog->exec()) {
+        userActions->bOpenPathCfgUC_clicked(cfgFileDialog->selectedFiles()[0]);
     }
 }
 
 void SettingForm::on_bSaveSettings_clicked() {
-    QString pathToUC = ui->tbPathToUC->text();
-    QString pathToCfg = ui->tbPathToCfgUC->text();
-    QStringList config;
-    config.append("path_to_uncrustify = " + pathToUC + "\n");
-    config.append("path_to_config = " + pathToCfg);
-    QFile iniFile("settings.ini");
-    if(iniFile.open(QIODevice::WriteOnly)) {
-        foreach(auto item, config) {
-            iniFile.write(item.toUtf8());
-        }
-    }
-    iniFile.close();
-    this->close();
+    userActions->bSaveSettings_clicked();
+    close();
 }
 
 void SettingForm::on_bCloseSettingsWindow_clicked() {
-    on_bSaveSettings_clicked();
-    this->close();
+    close();
+}
+
+void SettingForm::connectSlots() {
+    connect(userActions, &UserActions::showMessageBox, this, &SettingForm::showMessageBox);
+    connect(userActions, &UserActions::runRenderGUI, this, &SettingForm::renderGUI);
+}
+
+void SettingForm::createGUI() {
+    ui->setupUi(this);
+    ucFileDialog = new QFileDialog();
+    ucFileDialog->setNameFilter(tr("Uncrustify (*.exe)"));
+    cfgFileDialog = new QFileDialog();
+    cfgFileDialog->setNameFilter(tr("Uncrustify config (*.cfg)"));
 }

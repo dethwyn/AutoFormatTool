@@ -73,9 +73,9 @@ void MainWindow::connectSlots() {
 
 void MainWindow::configureUi() {
     ui->setupUi(this);
-    settingForm = new SettingForm();
     State *stateInstance = &State::getInstance();
     userActions = new UserActions();
+    settingForm = new SettingForm(userActions);
     if(stateInstance->getProgressBarType() == 1) {
         progressBar = new NyanCatProgressBar();
         progressBar->setType(1);

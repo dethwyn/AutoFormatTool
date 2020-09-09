@@ -1,11 +1,12 @@
 #ifndef SETTINGFORM_H
 #define SETTINGFORM_H
 
-
+#include "useractions.h"
 
 #include <QWidget>
 #include <QFile>
 #include <QFileDialog>
+#include <QMessageBox>
 
 namespace Ui {
     class SettingForm;
@@ -15,10 +16,14 @@ class SettingForm : public QWidget {
     Q_OBJECT
 
 public:
-    explicit SettingForm(QWidget *parent = nullptr);
+    explicit SettingForm(UserActions *ua, QWidget *parent = nullptr);
     ~SettingForm();
     QString pathToUC;
     QString pathToCfg;
+
+public slots:
+    void renderGUI();
+    void showMessageBox(QString message);
 
 private slots:
     void on_tbPathToUC_textChanged(const QString &arg1);
@@ -30,6 +35,11 @@ private slots:
 
 private:
     Ui::SettingForm *ui;
+    UserActions *userActions;
+    void connectSlots();
+    void createGUI();
+    QFileDialog *ucFileDialog;
+    QFileDialog *cfgFileDialog;
 };
 
 #endif // SETTINGFORM_H
