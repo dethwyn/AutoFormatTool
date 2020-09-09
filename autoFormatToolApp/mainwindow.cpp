@@ -58,7 +58,7 @@ void MainWindow::on_bFormat_clicked() {
         double progresBarStep = round(100.0 / ui->listFiles->count());
         double currentProgressBarValue = 0;
         nc->setValue(static_cast<int>(currentProgressBarValue));
-        //ui->progressBar->setValue();
+        // ui->progressBar->setValue();
         while(ui->listFiles->count() > 0) {
             QString command("powershell.exe");
             QString pathToFile(ui->tbPath->text() + "/" + ui->listFiles->takeItem(0)->text());
@@ -72,7 +72,7 @@ void MainWindow::on_bFormat_clicked() {
             // ui->progressBar->setValue(static_cast<int>(currentProgressBarValue));
         }
         nc->setValue(100);
-        //ui->progressBar->setValue(100);
+        // ui->progressBar->setValue(100);
         final.exec();
     } else {
         QMessageBox msgBox;
