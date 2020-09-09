@@ -1,6 +1,8 @@
 #ifndef SETTINGFORM_H
 #define SETTINGFORM_H
 
+
+
 #include <QWidget>
 #include <QFile>
 #include <QFileDialog>
