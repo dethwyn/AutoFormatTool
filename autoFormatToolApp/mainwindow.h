@@ -42,7 +42,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     SettingForm *settingForm;
-    QProgressBar *progressBar;
+    NyanCatProgressBar *progressBar;
     QPushButton *testBt;
     UserActions *userActions;
     QFileDialog *selectDirDialog;

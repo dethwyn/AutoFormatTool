@@ -21,8 +21,11 @@ const auto k_purple = QColor::fromRgb(100, 50, 255);
 class NyanCatProgressBar : public QProgressBar {
 public:
     explicit NyanCatProgressBar(QWidget *parent = nullptr);
+    void setType(int typeRay);
+    int getTypeRay();
 protected:
     void paintEvent(QPaintEvent *) Q_DECL_OVERRIDE;
+    int typeRay;
 };
 
 #endif // NYANCATPROGRESSBAR_H
