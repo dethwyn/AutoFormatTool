@@ -52,7 +52,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="lbUC">
         <property name="text">
          <string>Путь до Uncrustify</string>
         </property>
@@ -77,7 +77,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="lbCFG">
         <property name="text">
          <string>Путь до конфига Uncrustify</string>
         </property>

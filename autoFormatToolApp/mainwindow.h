@@ -3,6 +3,8 @@
 
 #include "settingform.h"
 #include "nyancatprogressbar.h"
+#include "useractions.h"
+#include "state.h"
 
 #include <QDebug>
 #include <QMainWindow>
@@ -26,6 +28,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void renderGUI();
+
 private slots:
     void on_menuExit_triggered();
     void on_menuSettings_triggered();
@@ -36,9 +41,11 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    SettingForm *setting;
-    NyanCatProgressBar *nc;
+    SettingForm *settingForm;
+    QProgressBar *progressBar;
     QPushButton *testBt;
+    UserActions userActions;
+    void connectSlots();
 
 protected:
     virtual void keyPressEvent(QKeyEvent *event);
