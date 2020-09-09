@@ -20,7 +20,7 @@ SettingForm::SettingForm(QWidget *parent) :
     foreach(auto item, parse) {
         if(item[0] == "path_to_uncrustify") {
             ui->tbPathToUC->setText(item[2]);
-        } else if(item[0] == "path_to_config")   {
+        } else if(item[0] == "path_to_config") {
             ui->tbPathToCfgUC->setText(item[2]);
         }
     }
