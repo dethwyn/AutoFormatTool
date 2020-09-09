@@ -15,7 +15,9 @@ SOURCES += \
     $$PWD/nyancatprogressbar.cpp \
     $$PWD/state.cpp \
     $$PWD/useractions.cpp \
-    $$PWD/settings.cpp
+    $$PWD/settings.cpp \
+    $$PWD/stateget.cpp \
+    $$PWD/stateset.cpp
 
 HEADERS += \
     $$PWD/mainwindow.h \
