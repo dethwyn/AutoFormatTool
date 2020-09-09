@@ -17,49 +17,41 @@ void UserActions::bPath_clicked(QString path) {
 void UserActions::bFormat_clicked() {
     auto instance = &State::getInstance();
     if(instance->getListFilesStringList()->count() != 0) {
-        QString uncrustifyPath = instance;
-        QString uncrustifyConfigPath = settingForm->pathToCfg;
+        QString uncrustifyPath = instance->getLinePathUcText();
+        QString uncrustifyConfigPath = instance->getLinePathCfgText();
         QFile UC(uncrustifyPath);
         QFile UCcfg(uncrustifyConfigPath);
         if(!UC.exists()) {
-            QMessageBox mbNotFoundUC;
-            mbNotFoundUC.setText("Не найден файл uncrustify.exe, проверьте настройки");
-            mbNotFoundUC.exec();
-            settingForm->show();
+            emit showMessageBox("Не найден файл uncrustify.exe, проверьте настройки");
+            emit runRenderGUI();
             return;
         }
         if(!UCcfg.exists()) {
-            QMessageBox mbNotFoundUC;
-            mbNotFoundUC.setText("Не найден файл конфигурации, проверьте настройки");
-            mbNotFoundUC.exec();
-            settingForm->show();
+            emit showMessageBox("Не найден файл конфигурации, проверьте настройки");
+            emit runRenderGUI();
             return;
         }
-        QMessageBox final;
-        final.setText("Форматирование завершено");
-        double progresBarStep = round(100.0 / ui->listFiles->count());
+        double progresBarStep = round(100.0 / instance->getListFilesStringList()->count());
         double currentProgressBarValue = 0;
-        progressBar->setValue(static_cast<int>(currentProgressBarValue));
-        // ui->progressBar->setValue();
-        while(ui->listFiles->count() > 0) {
+        instance->setProgressBarValue(static_cast<int>(currentProgressBarValue));
+        while(instance->getListFilesStringList()->count() > 0) {
             QString command("powershell.exe");
-            QString pathToFile(ui->tbPath->text() + "/" + ui->listFiles->takeItem(0)->text());
+            QString path = instance->getLinePathText();
+            QString fileName = instance->getListFilesStringList()->takeFirst();
+            QString pathToFile(path + "/" + fileName);
             QStringList params;
             QString param = "%1 -c %2 -f %3 -o %3 --no-backup";
             params.append(param.arg(uncrustifyPath).arg(uncrustifyConfigPath).arg(pathToFile));
             int result = QProcess::execute(command, params);
             qDebug() << result;
             currentProgressBarValue += progresBarStep;
-            progressBar->setValue(static_cast<int>(currentProgressBarValue));
-            // ui->progressBar->setValue(static_cast<int>(currentProgressBarValue));
+            instance->setProgressBarValue(static_cast<int>(currentProgressBarValue));
+            emit runRenderGUI();
         }
-        progressBar->setValue(100);
-        // ui->progressBar->setValue(100);
-        final.exec();
+        instance->setProgressBarValue(100);
+        emit showMessageBox("Форматирование завершено");
     } else {
-        QMessageBox msgBox;
-        msgBox.setText("Не выбран ни один файл с исходным кодом!");
-        msgBox.exec();
+        emit showMessageBox("Не выбран ни один файл с исходным кодом!");
     }
     emit runRenderGUI();
 }

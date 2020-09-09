@@ -6,6 +6,8 @@
 
 #include <QObject>
 #include <QFileDialog>
+#include <QtMath>
+#include <QProcess>
 
 class UserActions : public QObject {
     Q_OBJECT
@@ -20,6 +22,7 @@ public:
     void deleteFile(int pos);
 signals:
     void runRenderGUI();
+    void showMessageBox(QString);
 public slots:
 };
 

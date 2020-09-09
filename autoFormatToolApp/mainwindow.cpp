@@ -27,6 +27,12 @@ void MainWindow::renderGUI() {
     }
 }
 
+void MainWindow::showMessageBox(QString message) {
+    QMessageBox messageBox;
+    messageBox.setText(message);
+    messageBox.exec();
+}
+
 void MainWindow::keyPressEvent(QKeyEvent *event) {
     int key = event->key();
     if(key == Qt::Key_Delete) {
@@ -62,6 +68,7 @@ void MainWindow::on_tbPath_textChanged(const QString &arg1) {
 
 void MainWindow::connectSlots() {
     connect(userActions, &UserActions::runRenderGUI, this, &MainWindow::renderGUI);
+    connect(userActions, &UserActions::showMessageBox, this, &MainWindow::showMessageBox);
 }
 
 void MainWindow::configureUi() {

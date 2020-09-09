@@ -30,6 +30,7 @@ public:
 
 public slots:
     void renderGUI();
+    void showMessageBox(QString message);
 
 private slots:
     void on_menuExit_triggered();
