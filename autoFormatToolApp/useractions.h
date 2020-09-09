@@ -2,8 +2,10 @@
 #define USERACTIONS_H
 
 #include "settings.h"
+#include "state.h"
 
 #include <QObject>
+#include <QFileDialog>
 
 class UserActions : public QObject {
     Q_OBJECT

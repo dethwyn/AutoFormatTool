@@ -5,7 +5,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     settingForm = new SettingForm();
     State *stateInstance = &State::getInstance();
-    if(stateInstance->probressBarType == 1) {
+    if(stateInstance->getProgressBarType() == 1) {
         progressBar = new NyanCatProgressBar();
     } else {
         progressBar = new QProgressBar();
@@ -20,14 +20,14 @@ MainWindow::~MainWindow() {
 
 void MainWindow::renderGUI() {
     State *stateInstance = &State::getInstance();
-    ui->menuSettings->setText(stateInstance->menuSettingText);
-    ui->menuExit->setText(stateInstance->menuExitText);
-    ui->menu->setTitle(stateInstance->menuFileText);
-    ui->bPath->setText(stateInstance->buttonBrowseText);
-    ui->bFormat->setText(stateInstance->buttonFormatText);
-    ui->bRefresh->setText(stateInstance->buttonRefreshText);
-    ui->tbPath->setText(stateInstance->linePathText);
-    ui->lbPathSource->setText(stateInstance->labelPathText); \
+    ui->menuSettings->setText(stateInstance->getMenuSettingText());
+    ui->menuExit->setText(stateInstance->getMenuExitText());
+    ui->menu->setTitle(stateInstance->getMenuFileText());
+    ui->bPath->setText(stateInstance->getButtonBrowseText());
+    ui->bFormat->setText(stateInstance->getButtonFormatText());
+    ui->bRefresh->setText(stateInstance->getButtonRefreshText());
+    ui->tbPath->setText(stateInstance->getLinePathText());
+    ui->lbPathSource->setText(stateInstance->getLabelPathText()); \
 
 }
 

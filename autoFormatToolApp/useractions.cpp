@@ -8,6 +8,11 @@ void UserActions::menuSettings_triggered() {
 }
 
 void UserActions::bPath_clicked() {
+    auto instance = &State::getInstance();
+    auto path = QFileDialog::getExistingDirectory();
+    instance->setLinePathText(path);
+    //auto path = QFileDialog::getExistingDirectory();
+    //ui->tbPath->setText(path);
     emit runRenderGUI();
 }
 
