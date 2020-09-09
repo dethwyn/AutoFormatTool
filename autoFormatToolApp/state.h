@@ -1,12 +1,16 @@
 #ifndef STATE_H
 #define STATE_H
 
+#include <QString>
+#include <QStringList>
+
 class State; // Опережающее объявление класса State для использования в StateDestructor
 
 // Класс StateDestructor вспомогательный, для автоматического удаления State
 class StateDestructor {
 private:
     State *instance;
+
 public:
     // ---Деструктор для удаления экземпляра State
     ~StateDestructor();
@@ -18,6 +22,7 @@ class State {
 private:
     static State *instance; // Указатель на экземпляр состояния
     static StateDestructor destructor; // Экземпляр десруктора
+
 protected:
     // ---Конструктор первой инициализации
     State();
@@ -31,6 +36,27 @@ protected:
 
 public:
     static State& getInstance();
+    // Главное окно
+    QString menuFileText;
+    QString menuSettingText;
+    QString menuExitText;
+    QString buttonBrowseText;
+    QString linePathText;
+    QString labelPathText;
+    QString buttonRefreshText;
+    QStringList listFilesStringList;
+    QString buttonFormatText;
+    int progressBarValue;
+    int probressBarType;
+    // Окно настроек
+    QString buttonBrowseUcText;
+    QString linePathUcText;
+    QString labelPathUcText;
+    QString buttonBrowseCfgText;
+    QString labelPathCfgText;
+    QString linePathCfgText;
+    QString buttonSaveText;
+    QString buttonCloseText;
 };
 
 #endif // STATE_H

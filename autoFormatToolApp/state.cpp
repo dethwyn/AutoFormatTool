@@ -35,4 +35,25 @@ State::~State() {
  * \brief – Основной конструктор первоначальной инициализации состояния
  */
 State::State() {
+    // Главное окно
+    menuFileText = "Файл";
+    menuSettingText = "Настройки";
+    menuExitText = "Выход";
+    buttonBrowseText = "Обзор";
+    linePathText = "";
+    labelPathText = "Путь до исходников";
+    buttonRefreshText = "Обновить";
+    listFilesStringList.clear();
+    buttonFormatText = "Форматировать";
+    progressBarValue = 0;
+    probressBarType = 0;
+    // Окно настроек
+    buttonBrowseUcText = "Обзор";
+    linePathUcText = "";
+    labelPathUcText = "Путь до Uncrustify";
+    buttonBrowseCfgText = "Обзор";
+    labelPathCfgText= "Путь до конфига";;
+    linePathCfgText= "";
+    buttonSaveText = "Сохранить";
+    buttonCloseText = "Закрыть";
 }
