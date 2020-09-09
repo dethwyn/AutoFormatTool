@@ -26,6 +26,7 @@ State& State::getInstance() {
     }
     return *instance;
 }
+
 /*!
  * \brief – Пустой деструктор State (экземпляр автоматически удаляется классом StateDestructor)
  */
@@ -46,14 +47,15 @@ State::State() {
     listFilesStringList.clear();
     buttonFormatText = "Форматировать";
     progressBarValue = 0;
-    probressBarType = 0;
+    progressBarType = 0;
     // Окно настроек
     buttonBrowseUcText = "Обзор";
     linePathUcText = "";
     labelPathUcText = "Путь до Uncrustify";
     buttonBrowseCfgText = "Обзор";
-    labelPathCfgText= "Путь до конфига";;
-    linePathCfgText= "";
+    labelPathCfgText = "Путь до конфига";
+    ;
+    linePathCfgText = "";
     buttonSaveText = "Сохранить";
     buttonCloseText = "Закрыть";
 }

@@ -22,6 +22,27 @@ class State {
 private:
     static State *instance; // Указатель на экземпляр состояния
     static StateDestructor destructor; // Экземпляр десруктора
+    // Главное окно
+    QString menuFileText;
+    QString menuSettingText;
+    QString menuExitText;
+    QString buttonBrowseText;
+    QString linePathText;
+    QString labelPathText;
+    QString buttonRefreshText;
+    QStringList listFilesStringList;
+    QString buttonFormatText;
+    int progressBarValue;
+    int progressBarType;
+    // Окно настроек
+    QString buttonBrowseUcText;
+    QString linePathUcText;
+    QString labelPathUcText;
+    QString buttonBrowseCfgText;
+    QString labelPathCfgText;
+    QString linePathCfgText;
+    QString buttonSaveText;
+    QString buttonCloseText;
 
 protected:
     // ---Конструктор первой инициализации
@@ -36,27 +57,34 @@ protected:
 
 public:
     static State& getInstance();
-    // Главное окно
-    QString menuFileText;
-    QString menuSettingText;
-    QString menuExitText;
-    QString buttonBrowseText;
-    QString linePathText;
-    QString labelPathText;
-    QString buttonRefreshText;
-    QStringList listFilesStringList;
-    QString buttonFormatText;
-    int progressBarValue;
-    int probressBarType;
-    // Окно настроек
-    QString buttonBrowseUcText;
-    QString linePathUcText;
-    QString labelPathUcText;
-    QString buttonBrowseCfgText;
-    QString labelPathCfgText;
-    QString linePathCfgText;
-    QString buttonSaveText;
-    QString buttonCloseText;
+    // Геттеры главного окна
+    QString getMenuFileText();
+    QString getMenuSettingText();
+    QString getMenuExitText();
+    QString getButtonBrowseText();
+    QString getLinePathText();
+    QString getLabelPathText();
+    QString getButtonRefreshText();
+    QStringList getListFilesStringList();
+    QString getButtonFormatText();
+    int getProgressBarValue();
+    int getProgressBarType();
+    // Сеттеры главного окна
+    void setMenuFileText(const QString &text);
+    void setMenuSettingText(const QString &text);
+    void setMenuExitText(const QString &text);
+    void setButtonBrowseText(const QString &text);
+    void setLinePathText(const QString &text);
+    void setLabelPathText(const QString &text);
+    void setButtonRefreshText(const QString &text);
+    void setListFilesStringList(const QStringList &list);
+    void addItemListFiles(const QString &item);
+    void setButtonFormatText(const QString &text);
+    void setProgressBarValue(int value);
+    void setProgressBarType(int type);
+    // Геттеры окна настроек
+
+    // Сеттеры окна настроек
 };
 
 #endif // STATE_H
