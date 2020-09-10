@@ -25,12 +25,6 @@ void SettingForm::renderGUI() {
     ui->bCloseSettingsWindow->setText(instance->getButtonCloseText());
 }
 
-void SettingForm::showMessageBox(QString message) {
-    QMessageBox box;
-    box.setText(message);
-    box.exec();
-}
-
 void SettingForm::on_tbPathToUC_textChanged(const QString &arg1) {
     userActions->tbPathToUC_textChanged(arg1);
 }
@@ -54,14 +48,15 @@ void SettingForm::on_bOpenPathCfgUC_clicked() {
 void SettingForm::on_bSaveSettings_clicked() {
     userActions->bSaveSettings_clicked();
     close();
+    delete this;
 }
 
 void SettingForm::on_bCloseSettingsWindow_clicked() {
     close();
+    delete this;
 }
 
 void SettingForm::connectSlots() {
-    connect(userActions, &UserActions::showMessageBox, this, &SettingForm::showMessageBox);
     connect(userActions, &UserActions::runRenderGUI, this, &SettingForm::renderGUI);
 }
 

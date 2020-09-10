@@ -13,6 +13,7 @@ public:
     QString pathLastSource;
     void loadSettings();
     void updateSettings(QString pUC = "", QString pCFG = "", int pbType = 0, QString pLast = "");
+    void saveSettins();
 };
 
 #endif // SETTINGS_H

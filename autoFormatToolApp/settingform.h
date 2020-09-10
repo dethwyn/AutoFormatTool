@@ -23,7 +23,6 @@ public:
 
 public slots:
     void renderGUI();
-    void showMessageBox(QString message);
 
 private slots:
     void on_tbPathToUC_textChanged(const QString &arg1);
