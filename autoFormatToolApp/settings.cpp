@@ -48,7 +48,7 @@ void Settings::saveSettins() {
     if(iniFile.open(QIODevice::WriteOnly)) {
         iniFile.write(iniPathUC.arg(pathUC).toUtf8() + "\n");
         iniFile.write(iniPathCFG.arg(pathCFG).toUtf8() + "\n");
-        iniFile.write(iniPathLastSource.arg(progressBarType).toUtf8() + "\n");
-        iniFile.write(iniProgressBarType.arg(pathLastSource).toUtf8() + "\n");
+        iniFile.write(iniPathLastSource.arg(pathLastSource).toUtf8() + "\n");
+        iniFile.write(iniProgressBarType.arg(progressBarType).toUtf8() + "\n");
     }
 }
