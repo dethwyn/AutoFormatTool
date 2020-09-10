@@ -27,6 +27,7 @@ void UserActions::bPath_clicked(const QString &path) {
 
 void UserActions::bFormat_clicked() {
     auto instance = &State::getInstance();
+    instance->setProgressBarValue(0);
     if(instance->getListFilesStringList()->count() != 0) {
         QString uncrustifyPath = instance->getLinePathUcText();
         QString uncrustifyConfigPath = instance->getLinePathCfgText();
@@ -69,6 +70,7 @@ void UserActions::bFormat_clicked() {
 
 void UserActions::bRefresh_clicked() {
     auto instance = &State::getInstance();
+    instance->setProgressBarValue(0);
     tbPath_textChanged(instance->getLinePathText());
 }
 
@@ -101,6 +103,14 @@ void UserActions::deleteFile(int pos) {
 void UserActions::inputSecretCode(const QString &symbol) {
     auto instance = &State::getInstance();
     instance->setSecretCode(instance->getSecretCode() + symbol);
+    if(instance->getSecretCode() == "nyancat") {
+        instance->setProgressBarValue(0);
+        instance->setSecretCode("");
+        emit changeProgressBar();
+    } else if(instance->getSecretCode().count() >= 7) {
+        instance->setSecretCode("");
+    }
+    emit runRenderGUI();
 }
 
 void UserActions::tbPathToUC_textChanged(const QString &arg1) {

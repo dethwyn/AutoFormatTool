@@ -26,16 +26,19 @@ void MainWindow::renderGUI() {
     foreach(auto item, *instance->getListFilesStringList()) {
         ui->listFiles->addItem(item);
     }
-//    if(instance->getSecretCode() == "nyan") {
-//        progressBar = new NyanCatProgressBar();
-//        progressBar->setType(1);
-//    }
 }
 
 void MainWindow::showMessageBox(QString message) {
     QMessageBox messageBox;
     messageBox.setText(message);
     messageBox.exec();
+}
+
+void MainWindow::changeProgressBar() {
+    delete progressBar;
+    progressBar = new NyanCatProgressBar();
+    progressBar->setType(1);
+    ui->verticalLayout->addWidget(progressBar);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event) {
@@ -77,6 +80,7 @@ void MainWindow::on_tbPath_textChanged(const QString &arg1) {
 void MainWindow::connectSlots() {
     connect(userActions, &UserActions::runRenderGUI, this, &MainWindow::renderGUI);
     connect(userActions, &UserActions::showMessageBox, this, &MainWindow::showMessageBox);
+    connect(userActions, &UserActions::changeProgressBar, this, &MainWindow::changeProgressBar);
 }
 
 void MainWindow::configureUi() {

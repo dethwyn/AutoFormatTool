@@ -33,6 +33,7 @@ public:
 signals:
     void runRenderGUI();
     void showMessageBox(QString);
+    void changeProgressBar();
 public slots:
 };
 
