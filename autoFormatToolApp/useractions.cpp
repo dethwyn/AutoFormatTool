@@ -14,9 +14,14 @@ void UserActions::menuSettings_triggered() {
     emit runRenderGUI();
 }
 
-void UserActions::bPath_clicked(QString path) {
+void UserActions::bPath_clicked(const QString &path) {
     auto instance = &State::getInstance();
     instance->setLinePathText(path);
+    auto pathUc = instance->getLinePathUcText();
+    auto pathCfg = instance->getLinePathCfgText();
+    auto lastPath = path;
+    auto pbType = instance->getProgressBarType();
+    settings->updateSettings(pathUc, pathCfg, pbType, lastPath);
     emit runRenderGUI();
 }
 

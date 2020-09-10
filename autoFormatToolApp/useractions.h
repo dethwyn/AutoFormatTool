@@ -17,7 +17,7 @@ public:
     Settings *settings;
     // Методы основного окна
     void menuSettings_triggered();
-    void bPath_clicked(QString path);
+    void bPath_clicked(const QString &path);
     void bFormat_clicked();
     void bRefresh_clicked();
     void tbPath_textChanged(const QString &arg1);
