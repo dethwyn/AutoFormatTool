@@ -69,13 +69,13 @@ void UserActions::bFormat_clicked() {
 
 void UserActions::bRefresh_clicked() {
     auto instance = &State::getInstance();
-    UserActions::tbPath_textChanged(instance->getLinePathText());
+    tbPath_textChanged(instance->getLinePathText());
 }
 
 void UserActions::tbPath_textChanged(const QString &text) {
     auto instance = &State::getInstance();
     instance->setLinePathText(text);
-    QDir dir;
+    QDir dir(text);
     if(dir.exists(text)) {
         instance->getListFilesStringList()->clear();
         dir.setPath(text);
@@ -84,6 +84,8 @@ void UserActions::tbPath_textChanged(const QString &text) {
         foreach(auto item, files) {
             instance->addItemListFiles(item);
         }
+    } else {
+        instance->getListFilesStringList()->clear();
     }
     emit runRenderGUI();
 }
