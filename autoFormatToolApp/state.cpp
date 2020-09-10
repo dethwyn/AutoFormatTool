@@ -55,8 +55,9 @@ State::State() {
     labelPathUcText = "Путь до Uncrustify";
     buttonBrowseCfgText = "Обзор";
     labelPathCfgText = "Путь до конфига";
-    ;
     linePathCfgText = "";
     buttonSaveText = "Сохранить";
     buttonCloseText = "Закрыть";
+
+    secretCode = "";
 }

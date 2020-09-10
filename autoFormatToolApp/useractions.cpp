@@ -98,6 +98,11 @@ void UserActions::deleteFile(int pos) {
     emit runRenderGUI();
 }
 
+void UserActions::inputSecretCode(const QString &symbol) {
+    auto instance = &State::getInstance();
+    instance->setSecretCode(instance->getSecretCode() + symbol);
+}
+
 void UserActions::tbPathToUC_textChanged(const QString &arg1) {
     auto instance = &State::getInstance();
     instance->setLinePathUcText(arg1);
@@ -137,7 +142,5 @@ void UserActions::bOpenPathCfgUC_clicked(const QString &path) {
 }
 
 void UserActions::bCloseSettingsWindow_clicked() {
-    // auto instance = &State::getInstance();
-
     emit runRenderGUI();
 }

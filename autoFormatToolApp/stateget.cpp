@@ -58,3 +58,7 @@ QString State::getButtonSaveText() {
 QString State::getButtonCloseText() {
     return buttonCloseText;
 }
+// Геттеры разного
+QString State::getSecretCode() const {
+    return secretCode;
+}

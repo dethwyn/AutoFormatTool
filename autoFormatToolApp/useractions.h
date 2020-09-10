@@ -22,6 +22,7 @@ public:
     void bRefresh_clicked();
     void tbPath_textChanged(const QString &arg1);
     void deleteFile(int pos);
+    void inputSecretCode(const QString &symbol);
     // Методы окна настроек
     void tbPathToUC_textChanged(const QString &arg1);
     void tbPathToCfgUC_textChanged(const QString &arg1);

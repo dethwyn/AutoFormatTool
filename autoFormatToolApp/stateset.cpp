@@ -64,3 +64,7 @@ void State::setButtonSaveText(const QString &text) {
 void State::setButtonCloseText(const QString &text) {
     buttonCloseText = text;
 }
+// Сеттеры разного
+void State::setSecretCode(const QString &value) {
+    secretCode = value;
+}

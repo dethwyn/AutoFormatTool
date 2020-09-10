@@ -26,6 +26,10 @@ void MainWindow::renderGUI() {
     foreach(auto item, *instance->getListFilesStringList()) {
         ui->listFiles->addItem(item);
     }
+//    if(instance->getSecretCode() == "nyan") {
+//        progressBar = new NyanCatProgressBar();
+//        progressBar->setType(1);
+//    }
 }
 
 void MainWindow::showMessageBox(QString message) {
@@ -38,6 +42,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event) {
     int key = event->key();
     if(key == Qt::Key_Delete) {
         userActions->deleteFile(ui->listFiles->currentRow());
+    } else {
+        userActions->inputSecretCode(event->text());
     }
 }
 

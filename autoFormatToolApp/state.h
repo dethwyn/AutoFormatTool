@@ -44,6 +44,8 @@ private:
     QString linePathCfgText;
     QString buttonSaveText;
     QString buttonCloseText;
+    // Разное
+    QString secretCode;
 
 protected:
     // ---Конструктор первой инициализации
@@ -102,6 +104,10 @@ public:
     void setLinePathCfgText(const QString &text);
     void setButtonSaveText(const QString &text);
     void setButtonCloseText(const QString &text);
+    // Геттеры разного
+    QString getSecretCode() const;
+    // Сеттеры разного
+    void setSecretCode(const QString &value);
 };
 
 #endif // STATE_H
