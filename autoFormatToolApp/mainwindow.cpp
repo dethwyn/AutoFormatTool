@@ -21,6 +21,7 @@ void MainWindow::renderGUI() {
     ui->bRefresh->setText(instance->getButtonRefreshText());
     ui->tbPath->setText(instance->getLinePathText());
     ui->lbPathSource->setText(instance->getLabelPathText());
+    progressBar->setValue(instance->getProgressBarValue());
     ui->listFiles->clear();
     foreach(auto item, *instance->getListFilesStringList()) {
         ui->listFiles->addItem(item);
@@ -45,6 +46,7 @@ void MainWindow::on_menuExit_triggered() {
 }
 
 void MainWindow::on_menuSettings_triggered() {
+    settingForm = new SettingForm(userActions);
     settingForm->show();
 }
 
@@ -75,7 +77,6 @@ void MainWindow::configureUi() {
     ui->setupUi(this);
     State *stateInstance = &State::getInstance();
     userActions = new UserActions();
-    settingForm = new SettingForm(userActions);
     if(stateInstance->getProgressBarType() == 1) {
         progressBar = new NyanCatProgressBar();
         progressBar->setType(1);
