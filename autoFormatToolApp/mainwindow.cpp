@@ -86,11 +86,6 @@ void MainWindow::configureUi() {
     State *stateInstance = &State::getInstance();
     userActions = new UserActions();
     progressBar = new NyanCatProgressBar();
-//    if(stateInstance->getProgressBarType() == 1) {
-//        progressBar->setType(1);
-//    } else {
-//        progressBar->setType(0);
-//    }
     ui->verticalLayout->addWidget(progressBar);
     selectDirDialog = new QFileDialog();
     selectDirDialog->setFileMode(QFileDialog::DirectoryOnly);
