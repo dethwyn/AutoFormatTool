@@ -35,6 +35,7 @@ private:
     QString buttonFormatText;
     int progressBarValue;
     int progressBarType;
+    int progressBarMax;
     QFileInfoList *listFileInfos;
     // Окно настроек
     QString buttonBrowseUcText;
@@ -73,6 +74,7 @@ public:
     QString getButtonFormatText();
     int getProgressBarValue();
     int getProgressBarType();
+    int getProgressBarMax() const;
     // Сеттеры главного окна
     void setMenuFileText(const QString &text);
     void setMenuSettingText(const QString &text);
@@ -87,6 +89,7 @@ public:
     void setButtonFormatText(const QString &text);
     void setProgressBarValue(int value);
     void setProgressBarType(int type);
+    void setProgressBarMax(int value);
     // Геттеры окна настроек
     QString getButtonBrowseUcText();
     QString getLinePathUcText();

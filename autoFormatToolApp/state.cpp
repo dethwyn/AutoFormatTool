@@ -36,6 +36,7 @@ State::~State() {
  * \brief – Основной конструктор первоначальной инициализации состояния
  */
 
+
 State::State() {
     // Главное окно
     menuFileText = "Файл";
@@ -50,6 +51,7 @@ State::State() {
     buttonFormatText = "Форматировать";
     progressBarValue = 0;
     progressBarType = 0;
+    progressBarMax = 1000;
     // Окно настроек
     buttonBrowseUcText = "Обзор";
     linePathUcText = "";

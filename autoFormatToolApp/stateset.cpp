@@ -30,6 +30,9 @@ void State::setProgressBarValue(int value) {
 void State::setProgressBarType(int type) {
     progressBarType = type;
 }
+void State::setProgressBarMax(int value) {
+    progressBarMax = value;
+}
 // Cеттеры окна настроек
 void State::setButtonBrowseUcText(const QString &text) {
     buttonBrowseUcText = text;

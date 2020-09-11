@@ -22,6 +22,7 @@ void MainWindow::renderGUI() {
     ui->tbPath->setText(instance->getLinePathText());
     ui->lbPathSource->setText(instance->getLabelPathText());
     progressBar->setValue(instance->getProgressBarValue());
+    progressBar->setMaximum(instance->getProgressBarMax());
     ui->listFiles->clear();
     foreach(auto item, *instance->getListFileInfos()) {
         ui->listFiles->addItem(item.fileName());
@@ -87,11 +88,10 @@ void MainWindow::configureUi() {
     ui->setupUi(this);
     State *stateInstance = &State::getInstance();
     userActions = new UserActions();
+    progressBar = new NyanCatProgressBar();
     if(stateInstance->getProgressBarType() == 1) {
-        progressBar = new NyanCatProgressBar();
         progressBar->setType(1);
     } else {
-        progressBar = new NyanCatProgressBar();
         progressBar->setType(0);
     }
     ui->verticalLayout->addWidget(progressBar);

@@ -39,7 +39,7 @@ void UserActions::bFormat_clicked() {
             emit runRenderGUI();
             return;
         }
-        double progresBarStep = round(100.0 / instance->getListFileInfos()->count());
+        double progresBarStep = round(instance->getProgressBarMax() / instance->getListFileInfos()->count());
         double currentProgressBarValue = 0;
         instance->setProgressBarValue(static_cast<int>(currentProgressBarValue));
         while(instance->getListFileInfos()->count() > 0) {
@@ -48,12 +48,12 @@ void UserActions::bFormat_clicked() {
             QString pathToFile = instance->getListFileInfos()->takeFirst().filePath();
             QString param = "%1 -c %2 -f %3 -o %3 --no-backup";
             params.append(param.arg(uncrustifyPath).arg(uncrustifyConfigPath).arg(pathToFile));
-            int result = QProcess::execute(command, params);
+            QProcess::execute(command, params);
             currentProgressBarValue += progresBarStep;
             instance->setProgressBarValue(static_cast<int>(currentProgressBarValue));
             emit runRenderGUI();
         }
-        instance->setProgressBarValue(100);
+        instance->setProgressBarValue(1000);
         emit showMessageBox("Форматирование завершено");
     } else {
         emit showMessageBox("Не выбран ни один файл с исходным кодом!");
@@ -102,6 +102,7 @@ void UserActions::inputSecretCode(const QString &symbol) {
         instance->setProgressBarValue(0);
         instance->setSecretCode("");
         emit changeProgressBar();
+
     } else if(instance->getSecretCode().count() >= 7) {
         instance->setSecretCode("");
     }
@@ -170,22 +171,3 @@ void UserActions::recourceFileFind(QString basePath) {
         }
     }
 }
-//        dir.setFilter(QDir::Dirs);
-//        if(dir.entryList().count() > 0) {
-//            QStringList dirList = dir.entryList();
-//            foreach(auto item, dirList) {
-//            }
-//        } else {
-//            dir.setFilter(QDir::Files);
-//            instance->getListFilesStringList()->clear();
-//            instance->getListFileInfos()->clear();
-//            dir.setNameFilters(QStringList() << "*.cpp" << "*.c" << "*.h" << "*.hpp");
-//            QStringList fileNames = dir.entryList();
-//            QFileInfoList fileInfos = dir.entryInfoList();
-//            foreach(auto item, fileNames) {
-//                instance->addItemListFiles(item);
-//            }
-//            foreach(auto item, fileInfos) {
-//                instance->addItemListFileInfos(item);
-//            }
-//        }

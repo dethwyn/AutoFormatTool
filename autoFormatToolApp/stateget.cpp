@@ -30,6 +30,9 @@ int State::getProgressBarValue() {
 int State::getProgressBarType() {
     return progressBarType;
 }
+int State::getProgressBarMax() const {
+    return progressBarMax;
+}
 // Геттеры окна настроек
 QString State::getButtonBrowseUcText() {
     return buttonBrowseText;
