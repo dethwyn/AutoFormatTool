@@ -61,5 +61,4 @@ State::State() {
     buttonCloseText = "Закрыть";
     // Разное
     secretCode = "";
-
 }
