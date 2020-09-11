@@ -1,6 +1,9 @@
 #include "settings.h"
 
 Settings::Settings(QObject *parent) {
+    if(parent != nullptr) {
+    }
+    progressBarType = 0;
     loadSettings();
 }
 
@@ -31,7 +34,7 @@ void Settings::loadSettings() {
     }
 }
 
-void Settings::updateSettings(QString pUC, QString pCFG, int pbType, QString pLast) {
+void Settings::updateSettings(const QString &pUC, const QString &pCFG, int pbType, const QString &pLast) {
     pathUC = pUC;
     pathCFG = pCFG;
     progressBarType = pbType;

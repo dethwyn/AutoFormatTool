@@ -84,7 +84,7 @@ public:
     void setLabelPathText(const QString &text);
     void setButtonRefreshText(const QString &text);
     void setListFileInfos(QFileInfoList *value);
-    void addItemListFileInfos(QFileInfo file);
+    void addItemListFileInfos(const QFileInfo &file);
     void deleteItemListFileInfos(int pos);
     void setButtonFormatText(const QString &text);
     void setProgressBarValue(int value);

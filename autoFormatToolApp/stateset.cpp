@@ -65,7 +65,7 @@ void State::setSecretCode(const QString &value) {
 void State::setListFileInfos(QFileInfoList *value) {
     listFileInfos = value;
 }
-void State::addItemListFileInfos(QFileInfo file) {
+void State::addItemListFileInfos(const QFileInfo &file) {
     listFileInfos->append(file);
 }
 void State::deleteItemListFileInfos(int pos) {

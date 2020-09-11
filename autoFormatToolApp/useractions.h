@@ -32,7 +32,7 @@ public:
     void bOpenPathCfgUC_clicked(const QString &path);
     void bCloseSettingsWindow_clicked();
 private:
-    void recourceFileFind(QString basePath);
+    void recourceFileFind(const QString &basePath);
 signals:
     void runRenderGUI();
     void showMessageBox(QString);

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QFile>
+#include <utility>
 
 class Settings {
 public:
@@ -12,7 +13,7 @@ public:
     int progressBarType;
     QString pathLastSource;
     void loadSettings();
-    void updateSettings(QString pUC = "", QString pCFG = "", int pbType = 0, QString pLast = "");
+    void updateSettings(const QString &pUC, const QString &pCFG, int pbType, const QString &pLast);
     void saveSettins();
 };
 

@@ -43,7 +43,7 @@ void UserActions::bFormat_clicked() {
             emit runRenderGUI();
             return;
         }
-        double progresBarStep = round(instance->getProgressBarMax() / instance->getListFileInfos()->count());
+        int progresBarStep = instance->getProgressBarMax() / instance->getListFileInfos()->count();
         double currentProgressBarValue = 0;
         instance->setProgressBarValue(static_cast<int>(currentProgressBarValue));
         while(instance->getListFileInfos()->count() > 0) {
@@ -76,9 +76,8 @@ void UserActions::tbPath_textChanged(const QString &text) {
     instance->setLinePathText(text);
     auto pathUc = instance->getLinePathUcText();
     auto pathCfg = instance->getLinePathCfgText();
-    auto lastPath = text;
     auto pbType = instance->getProgressBarType();
-    settings->updateSettings(pathUc, pathCfg, pbType, lastPath);
+    settings->updateSettings(pathUc, pathCfg, pbType, text);
     instance->getListFileInfos()->clear();
     if(text != "") {
         QDir dir(text);
@@ -155,7 +154,7 @@ void UserActions::bCloseSettingsWindow_clicked() {
     emit runRenderGUI();
 }
 
-void UserActions::recourceFileFind(QString basePath) {
+void UserActions::recourceFileFind(const QString &basePath) {
     auto instance = &State::getInstance();
     QDir dir(basePath);
     dir.setFilter(QDir::Dirs);

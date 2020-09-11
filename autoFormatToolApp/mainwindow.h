@@ -30,7 +30,7 @@ public:
 
 public slots:
     void renderGUI();
-    void showMessageBox(QString message);
+    void showMessageBox(const QString &message );
 
 private slots:
     void on_menuExit_triggered();
@@ -42,9 +42,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    SettingForm *settingForm;
     NyanCatProgressBar *progressBar;
-    QPushButton *testBt;
     UserActions *userActions;
     QFileDialog *selectDirDialog;
     void connectSlots();

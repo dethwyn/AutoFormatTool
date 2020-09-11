@@ -2,6 +2,9 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    userActions = new UserActions();
+    selectDirDialog = new QFileDialog();
+    progressBar = new NyanCatProgressBar();
     configureUi();
     connectSlots();
     renderGUI();
@@ -11,7 +14,6 @@ MainWindow::~MainWindow() {
     delete userActions;
     delete progressBar;
     delete selectDirDialog;
-    delete settingForm;
     delete ui;
 }
 
@@ -34,7 +36,7 @@ void MainWindow::renderGUI() {
     }
 }
 
-void MainWindow::showMessageBox(QString message) {
+void MainWindow::showMessageBox(const QString &message) {
     QMessageBox messageBox;
     messageBox.setText(message);
     messageBox.exec();
@@ -54,7 +56,7 @@ void MainWindow::on_menuExit_triggered() {
 }
 
 void MainWindow::on_menuSettings_triggered() {
-    settingForm = new SettingForm(userActions);
+    auto *settingForm = new SettingForm(userActions);
     settingForm->show();
 }
 
@@ -84,9 +86,6 @@ void MainWindow::connectSlots() {
 void MainWindow::configureUi() {
     ui->setupUi(this);
     State *stateInstance = &State::getInstance();
-    userActions = new UserActions();
-    progressBar = new NyanCatProgressBar();
     ui->verticalLayout->addWidget(progressBar);
-    selectDirDialog = new QFileDialog();
     selectDirDialog->setFileMode(QFileDialog::DirectoryOnly);
 }

@@ -4,6 +4,8 @@
 SettingForm::SettingForm(UserActions *ua, QWidget *parent) :
     QWidget(parent), ui(new Ui::SettingForm) {
     userActions = ua;
+    ucFileDialog = new QFileDialog();
+    cfgFileDialog = new QFileDialog();
     createGUI();
     connectSlots();
     renderGUI();
@@ -64,8 +66,6 @@ void SettingForm::connectSlots() {
 
 void SettingForm::createGUI() {
     ui->setupUi(this);
-    ucFileDialog = new QFileDialog();
     ucFileDialog->setNameFilter(tr("Uncrustify (*.exe)"));
-    cfgFileDialog = new QFileDialog();
     cfgFileDialog->setNameFilter(tr("Uncrustify config (*.cfg)"));
 }
