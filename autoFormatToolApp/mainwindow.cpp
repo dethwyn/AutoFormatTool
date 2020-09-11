@@ -23,6 +23,7 @@ void MainWindow::renderGUI() {
     ui->lbPathSource->setText(instance->getLabelPathText());
     progressBar->setValue(instance->getProgressBarValue());
     progressBar->setMaximum(instance->getProgressBarMax());
+    progressBar->setType(instance->getProgressBarType());
     ui->listFiles->clear();
     foreach(auto item, *instance->getListFileInfos()) {
         ui->listFiles->addItem(item.fileName());
@@ -33,13 +34,6 @@ void MainWindow::showMessageBox(QString message) {
     QMessageBox messageBox;
     messageBox.setText(message);
     messageBox.exec();
-}
-
-void MainWindow::changeProgressBar() {
-    delete progressBar;
-    progressBar = new NyanCatProgressBar();
-    progressBar->setType(1);
-    ui->verticalLayout->addWidget(progressBar);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event) {
@@ -81,7 +75,6 @@ void MainWindow::on_tbPath_textChanged(const QString &arg1) {
 void MainWindow::connectSlots() {
     connect(userActions, &UserActions::runRenderGUI, this, &MainWindow::renderGUI);
     connect(userActions, &UserActions::showMessageBox, this, &MainWindow::showMessageBox);
-    connect(userActions, &UserActions::changeProgressBar, this, &MainWindow::changeProgressBar);
 }
 
 void MainWindow::configureUi() {
@@ -89,11 +82,11 @@ void MainWindow::configureUi() {
     State *stateInstance = &State::getInstance();
     userActions = new UserActions();
     progressBar = new NyanCatProgressBar();
-    if(stateInstance->getProgressBarType() == 1) {
-        progressBar->setType(1);
-    } else {
-        progressBar->setType(0);
-    }
+//    if(stateInstance->getProgressBarType() == 1) {
+//        progressBar->setType(1);
+//    } else {
+//        progressBar->setType(0);
+//    }
     ui->verticalLayout->addWidget(progressBar);
     selectDirDialog = new QFileDialog();
     selectDirDialog->setFileMode(QFileDialog::DirectoryOnly);

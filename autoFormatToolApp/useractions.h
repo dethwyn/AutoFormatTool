@@ -35,7 +35,6 @@ private:
 signals:
     void runRenderGUI();
     void showMessageBox(QString);
-    void changeProgressBar();
 };
 
 #endif // USERACTIONS_H

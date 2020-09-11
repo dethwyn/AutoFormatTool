@@ -31,7 +31,6 @@ public:
 public slots:
     void renderGUI();
     void showMessageBox(QString message);
-    void changeProgressBar();
 
 private slots:
     void on_menuExit_triggered();

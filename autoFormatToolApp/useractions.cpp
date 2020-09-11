@@ -101,10 +101,10 @@ void UserActions::inputSecretCode(const QString &symbol) {
     if(instance->getSecretCode() == "nyancat") {
         instance->setProgressBarValue(0);
         instance->setSecretCode("");
-        emit changeProgressBar();
-
+        instance->setProgressBarType(1);
     } else if(instance->getSecretCode().count() >= 7) {
         instance->setSecretCode("");
+        instance->setProgressBarType(0);
     }
     emit runRenderGUI();
 }
