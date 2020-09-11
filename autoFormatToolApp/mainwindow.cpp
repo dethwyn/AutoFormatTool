@@ -23,8 +23,8 @@ void MainWindow::renderGUI() {
     ui->lbPathSource->setText(instance->getLabelPathText());
     progressBar->setValue(instance->getProgressBarValue());
     ui->listFiles->clear();
-    foreach(auto item, *instance->getListFilesStringList()) {
-        ui->listFiles->addItem(item);
+    foreach(auto item, *instance->getListFileInfos()) {
+        ui->listFiles->addItem(item.fileName());
     }
 }
 

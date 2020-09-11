@@ -30,11 +30,12 @@ public:
     void bOpenPathUC_clicked(const QString &path);
     void bOpenPathCfgUC_clicked(const QString &path);
     void bCloseSettingsWindow_clicked();
+private:
+    void recourceFileFind(QString basePath);
 signals:
     void runRenderGUI();
     void showMessageBox(QString);
     void changeProgressBar();
-public slots:
 };
 
 #endif // USERACTIONS_H

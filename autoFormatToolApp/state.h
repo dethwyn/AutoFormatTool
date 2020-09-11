@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QString>
 #include <QStringList>
+#include <QFileInfoList>
 
 class State; // Опережающее объявление класса State для использования в StateDestructor
 
@@ -31,10 +32,10 @@ private:
     QString linePathText;
     QString labelPathText;
     QString buttonRefreshText;
-    QStringList *listFilesStringList;
     QString buttonFormatText;
     int progressBarValue;
     int progressBarType;
+    QFileInfoList *listFileInfos;
     // Окно настроек
     QString buttonBrowseUcText;
     QString linePathUcText;
@@ -68,7 +69,7 @@ public:
     QString getLinePathText();
     QString getLabelPathText();
     QString getButtonRefreshText();
-    QStringList *getListFilesStringList();
+    QFileInfoList *getListFileInfos() const;
     QString getButtonFormatText();
     int getProgressBarValue();
     int getProgressBarType();
@@ -80,9 +81,9 @@ public:
     void setLinePathText(const QString &text);
     void setLabelPathText(const QString &text);
     void setButtonRefreshText(const QString &text);
-    void setListFilesStringList(QStringList *list);
-    void addItemListFiles(const QString &item);
-    void deleteItemListFiles(int pos);
+    void setListFileInfos(QFileInfoList *value);
+    void addItemListFileInfos(QFileInfo file);
+    void deleteItemListFileInfos(int pos);
     void setButtonFormatText(const QString &text);
     void setProgressBarValue(int value);
     void setProgressBarType(int type);
@@ -106,6 +107,7 @@ public:
     void setButtonCloseText(const QString &text);
     // Геттеры разного
     QString getSecretCode() const;
+
     // Сеттеры разного
     void setSecretCode(const QString &value);
 };

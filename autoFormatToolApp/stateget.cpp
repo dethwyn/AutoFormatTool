@@ -21,9 +21,6 @@ QString State::getLabelPathText() {
 QString State::getButtonRefreshText() {
     return buttonRefreshText;
 }
-QStringList *State::getListFilesStringList() {
-    return listFilesStringList;
-}
 QString State::getButtonFormatText() {
     return buttonFormatText;
 }
@@ -61,4 +58,7 @@ QString State::getButtonCloseText() {
 // Геттеры разного
 QString State::getSecretCode() const {
     return secretCode;
+}
+QFileInfoList *State::getListFileInfos() const {
+    return listFileInfos;
 }

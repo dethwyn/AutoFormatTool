@@ -17,18 +17,14 @@ void UserActions::menuSettings_triggered() {
 void UserActions::bPath_clicked(const QString &path) {
     auto instance = &State::getInstance();
     instance->setLinePathText(path);
-    auto pathUc = instance->getLinePathUcText();
-    auto pathCfg = instance->getLinePathCfgText();
-    auto lastPath = path;
-    auto pbType = instance->getProgressBarType();
-    settings->updateSettings(pathUc, pathCfg, pbType, lastPath);
+
     emit runRenderGUI();
 }
 
 void UserActions::bFormat_clicked() {
     auto instance = &State::getInstance();
     instance->setProgressBarValue(0);
-    if(instance->getListFilesStringList()->count() != 0) {
+    if(instance->getListFileInfos()->count() != 0) {
         QString uncrustifyPath = instance->getLinePathUcText();
         QString uncrustifyConfigPath = instance->getLinePathCfgText();
         QFile UC(uncrustifyPath);
@@ -43,19 +39,16 @@ void UserActions::bFormat_clicked() {
             emit runRenderGUI();
             return;
         }
-        double progresBarStep = round(100.0 / instance->getListFilesStringList()->count());
+        double progresBarStep = round(100.0 / instance->getListFileInfos()->count());
         double currentProgressBarValue = 0;
         instance->setProgressBarValue(static_cast<int>(currentProgressBarValue));
-        while(instance->getListFilesStringList()->count() > 0) {
+        while(instance->getListFileInfos()->count() > 0) {
             QString command("powershell.exe");
-            QString path = instance->getLinePathText();
-            QString fileName = instance->getListFilesStringList()->takeFirst();
-            QString pathToFile(path + "/" + fileName);
             QStringList params;
+            QString pathToFile = instance->getListFileInfos()->takeFirst().filePath();
             QString param = "%1 -c %2 -f %3 -o %3 --no-backup";
             params.append(param.arg(uncrustifyPath).arg(uncrustifyConfigPath).arg(pathToFile));
             int result = QProcess::execute(command, params);
-            qDebug() << result;
             currentProgressBarValue += progresBarStep;
             instance->setProgressBarValue(static_cast<int>(currentProgressBarValue));
             emit runRenderGUI();
@@ -77,25 +70,27 @@ void UserActions::bRefresh_clicked() {
 void UserActions::tbPath_textChanged(const QString &text) {
     auto instance = &State::getInstance();
     instance->setLinePathText(text);
-    QDir dir(text);
-    if(dir.exists(text)) {
-        instance->getListFilesStringList()->clear();
-        dir.setPath(text);
-        dir.setNameFilters(QStringList() << "*.cpp" << "*.c" << "*.h" << "*.hpp");
-        QStringList files = dir.entryList();
-        foreach(auto item, files) {
-            instance->addItemListFiles(item);
+    auto pathUc = instance->getLinePathUcText();
+    auto pathCfg = instance->getLinePathCfgText();
+    auto lastPath = text;
+    auto pbType = instance->getProgressBarType();
+    settings->updateSettings(pathUc, pathCfg, pbType, lastPath);
+    instance->getListFileInfos()->clear();
+    if(text != "") {
+        QDir dir(text);
+        if(dir.exists(text)) {
+            recourceFileFind(text);
+        } else {
+            instance->getListFileInfos()->clear();
         }
-    } else {
-        instance->getListFilesStringList()->clear();
     }
     emit runRenderGUI();
 }
 
 void UserActions::deleteFile(int pos) {
     auto instance = &State::getInstance();
-    if(instance->getListFilesStringList()->count() > 0) {
-        instance->deleteItemListFiles(pos);
+    if(instance->getListFileInfos()->count() > 0) {
+        instance->deleteItemListFileInfos(pos);
     }
     emit runRenderGUI();
 }
@@ -154,3 +149,43 @@ void UserActions::bOpenPathCfgUC_clicked(const QString &path) {
 void UserActions::bCloseSettingsWindow_clicked() {
     emit runRenderGUI();
 }
+
+void UserActions::recourceFileFind(QString basePath) {
+    auto instance = &State::getInstance();
+    QDir dir(basePath);
+    dir.setFilter(QDir::Dirs);
+    auto cleanDir = dir.entryList();
+    cleanDir.removeAll("..");
+    cleanDir.removeAll(".");
+    if(cleanDir.count() > 0) {
+        for(int i = 0; i < cleanDir.count(); i++) {
+            recourceFileFind(basePath + "/" + cleanDir[i]);
+        }
+    } else {
+        dir.setFilter(QDir::Files);
+        dir.setNameFilters(QStringList() << "*.cpp" << "*.c" << "*.h" << "*.hpp");
+        QFileInfoList fileInfos = dir.entryInfoList();
+        foreach(auto item, fileInfos) {
+            instance->addItemListFileInfos(item);
+        }
+    }
+}
+//        dir.setFilter(QDir::Dirs);
+//        if(dir.entryList().count() > 0) {
+//            QStringList dirList = dir.entryList();
+//            foreach(auto item, dirList) {
+//            }
+//        } else {
+//            dir.setFilter(QDir::Files);
+//            instance->getListFilesStringList()->clear();
+//            instance->getListFileInfos()->clear();
+//            dir.setNameFilters(QStringList() << "*.cpp" << "*.c" << "*.h" << "*.hpp");
+//            QStringList fileNames = dir.entryList();
+//            QFileInfoList fileInfos = dir.entryInfoList();
+//            foreach(auto item, fileNames) {
+//                instance->addItemListFiles(item);
+//            }
+//            foreach(auto item, fileInfos) {
+//                instance->addItemListFileInfos(item);
+//            }
+//        }

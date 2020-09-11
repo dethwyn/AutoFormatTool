@@ -21,15 +21,6 @@ void State::setLabelPathText(const QString &text) {
 void State::setButtonRefreshText(const QString &text) {
     buttonRefreshText = text;
 }
-void State::setListFilesStringList(QStringList *list) {
-    listFilesStringList = list;
-}
-void State::addItemListFiles(const QString &item) {
-    listFilesStringList->append(item);
-}
-void State::deleteItemListFiles(int pos) {
-    listFilesStringList->removeAt(pos);
-}
 void State::setButtonFormatText(const QString &text) {
     buttonFormatText = text;
 }
@@ -67,4 +58,13 @@ void State::setButtonCloseText(const QString &text) {
 // Сеттеры разного
 void State::setSecretCode(const QString &value) {
     secretCode = value;
+}
+void State::setListFileInfos(QFileInfoList *value) {
+    listFileInfos = value;
+}
+void State::addItemListFileInfos(QFileInfo file) {
+    listFileInfos->append(file);
+}
+void State::deleteItemListFileInfos(int pos) {
+    listFileInfos->removeAt(pos);
 }
