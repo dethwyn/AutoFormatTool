@@ -14,6 +14,7 @@ class UserActions : public QObject {
     Q_OBJECT
 public:
     explicit UserActions(QObject *parent = nullptr);
+    ~UserActions();
     Settings *settings;
     // Методы основного окна
     void menuSettings_triggered();

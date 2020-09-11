@@ -10,6 +10,8 @@ SettingForm::SettingForm(UserActions *ua, QWidget *parent) :
 }
 
 SettingForm::~SettingForm() {
+    delete ucFileDialog;
+    delete cfgFileDialog;
     delete ui;
 }
 

@@ -45,7 +45,8 @@ void NyanCatProgressBar::paintEvent(QPaintEvent *) {
             gradient->setColorAt(0.0, QColor(200, 255, 200));
             gradient->setColorAt(1.0, QColor(0, 255, 0));
             painter.setBrush(*gradient);
-            painter.drawRect(pos_draw, 0, pos, height());
+            painter.drawRect(pos_draw, -1, pos, height());
+            delete gradient;
         }
     }
 }

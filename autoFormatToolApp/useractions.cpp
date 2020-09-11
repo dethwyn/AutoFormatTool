@@ -10,6 +10,10 @@ UserActions::UserActions(QObject *parent) : QObject(parent) {
     emit runRenderGUI();
 }
 
+UserActions::~UserActions() {
+    delete settings;
+}
+
 void UserActions::menuSettings_triggered() {
     emit runRenderGUI();
 }
@@ -102,7 +106,6 @@ void UserActions::inputSecretCode(const QString &symbol) {
         instance->setProgressBarValue(0);
         instance->setSecretCode("");
         emit changeProgressBar();
-
     } else if(instance->getSecretCode().count() >= 7) {
         instance->setSecretCode("");
     }

@@ -31,11 +31,11 @@ State& State::getInstance() {
  * \brief – Пустой деструктор State (экземпляр автоматически удаляется классом StateDestructor)
  */
 State::~State() {
+    delete listFileInfos;
 }
 /*!
  * \brief – Основной конструктор первоначальной инициализации состояния
  */
-
 
 State::State() {
     // Главное окно
