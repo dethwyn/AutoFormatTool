@@ -8,6 +8,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 }
 
 MainWindow::~MainWindow() {
+    delete userActions;
+    delete progressBar;
+    delete selectDirDialog;
+    delete settingForm;
     delete ui;
 }
 
