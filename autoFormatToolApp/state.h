@@ -37,6 +37,10 @@ private:
     int progressBarType;
     int progressBarMax;
     QFileInfoList *listFileInfos;
+    int wndPosX;
+    int wndPosY;
+    int wndWidth;
+    int wndHeight;
     // Окно настроек
     QString buttonBrowseUcText;
     QString linePathUcText;
@@ -113,6 +117,14 @@ public:
 
     // Сеттеры разного
     void setSecretCode(const QString &value);
+    int getWndPosX() const;
+    void setWndPosX(int value);
+    int getWndPosY() const;
+    void setWndPosY(int value);
+    int getWndWidth() const;
+    void setWndWidth(int value);
+    int getWndHeight() const;
+    void setWndHeight(int value);
 };
 
 #endif // STATE_H

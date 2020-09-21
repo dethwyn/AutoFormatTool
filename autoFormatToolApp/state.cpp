@@ -37,6 +37,46 @@ State::~State() {
  * \brief – Основной конструктор первоначальной инициализации состояния
  */
 
+int State::getWndPosX() const
+{
+    return wndPosX;
+}
+
+void State::setWndPosX(int value)
+{
+    wndPosX = value;
+}
+
+int State::getWndPosY() const
+{
+    return wndPosY;
+}
+
+void State::setWndPosY(int value)
+{
+    wndPosY = value;
+}
+
+int State::getWndWidth() const
+{
+    return wndWidth;
+}
+
+void State::setWndWidth(int value)
+{
+    wndWidth = value;
+}
+
+int State::getWndHeight() const
+{
+    return wndHeight;
+}
+
+void State::setWndHeight(int value)
+{
+    wndHeight = value;
+}
+
 State::State() {
     // Главное окно
     menuFileText = "Файл";
@@ -52,6 +92,10 @@ State::State() {
     progressBarValue = 0;
     progressBarType = 0;
     progressBarMax = 1000;
+    wndPosX = 100;
+    wndPosY = 100;
+    wndWidth = 510;
+    wndHeight = 300;
     // Окно настроек
     buttonBrowseUcText = "Обзор";
     linePathUcText = "";

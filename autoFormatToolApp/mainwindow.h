@@ -30,7 +30,7 @@ public:
 
 public slots:
     void renderGUI();
-    void showMessageBox(const QString &message );
+    void showMessageBox(const QString &message);
 
 private slots:
     void on_menuExit_triggered();
@@ -49,6 +49,8 @@ private:
     void configureUi();
 
 protected:
-    virtual void keyPressEvent(QKeyEvent *event);
+    virtual void resizeEvent(QResizeEvent *event) override;
+    virtual void moveEvent(QMoveEvent *event) override;
+    virtual void keyPressEvent(QKeyEvent *event) override;
 };
 #endif // MAINWINDOW_H

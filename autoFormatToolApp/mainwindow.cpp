@@ -34,6 +34,8 @@ void MainWindow::renderGUI() {
     foreach(auto item, *instance->getListFileInfos()) {
         ui->listFiles->addItem(item.fileName());
     }
+    this->resize(instance->getWndWidth(), instance->getWndHeight());
+    this->move(instance->getWndPosX(), instance->getWndPosY());
 }
 
 void MainWindow::showMessageBox(const QString &message) {
@@ -85,7 +87,18 @@ void MainWindow::connectSlots() {
 
 void MainWindow::configureUi() {
     ui->setupUi(this);
-    State *stateInstance = &State::getInstance();
     ui->verticalLayout->addWidget(progressBar);
     selectDirDialog->setFileMode(QFileDialog::DirectoryOnly);
+}
+
+void MainWindow::resizeEvent(QResizeEvent *event) {
+    int w = event->size().width();
+    int h = event->size().height();
+    userActions->changeSize(w, h);
+}
+
+void MainWindow::moveEvent(QMoveEvent *event) {
+    int x = event->pos().x();
+    int y = event->pos().y();
+    userActions->moveWindow(x,y);
 }

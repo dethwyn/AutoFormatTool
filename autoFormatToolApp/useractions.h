@@ -24,6 +24,8 @@ public:
     void tbPath_textChanged(const QString &arg1);
     void deleteFile(int pos);
     void inputSecretCode(const QString &symbol);
+    void changeSize(int width, int height);
+    void moveWindow(int posX, int posY);
     // Методы окна настроек
     void tbPathToUC_textChanged(const QString &arg1);
     void tbPathToCfgUC_textChanged(const QString &arg1);
