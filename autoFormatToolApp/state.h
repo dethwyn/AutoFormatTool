@@ -1,3 +1,9 @@
+/*
+ * \file state.h
+ * \brief Объявление класса State
+ * \author Сницарук Д. Г.
+ * \date 09.20
+ */
 #ifndef STATE_H
 #define STATE_H
 
@@ -24,7 +30,7 @@ class State {
 private:
     static State *instance; // Указатель на экземпляр состояния
     static StateDestructor destructor; // Экземпляр десруктора
-    // Главное окно
+    // Главное окно, данные для виджетов
     QString menuFileText;
     QString menuSettingText;
     QString menuExitText;
@@ -39,7 +45,7 @@ private:
     QFileInfoList *listFileInfos;
     int wndMinWidth;
     int wndMinHeight;
-    // Окно настроек
+    // Окно настроек, данные для виджетов
     QString buttonBrowseUcText;
     QString linePathUcText;
     QString labelPathUcText;
@@ -117,8 +123,9 @@ public:
     void setSecretCode(const QString &value);
 
     int getMinWndWidth() const;
-    void setMinWndWidth(int value);
+
     int getMinWndHeight() const;
+    void setMinWndWidth(int value);
     void setMinWndHeight(int value);
 };
 

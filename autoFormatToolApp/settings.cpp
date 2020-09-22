@@ -1,3 +1,9 @@
+/*
+ * \file settings.cpp
+ * \brief Реализация класса Settings
+ * \author Сницарук Д. Г.
+ * \date 09.20
+ */
 #include "settings.h"
 
 Settings::Settings(QObject *parent) {

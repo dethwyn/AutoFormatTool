@@ -1,3 +1,10 @@
+/*
+ * \file mainwindow.cpp
+ * \brief Реализация класса MainWindow
+ * \author Сницарук Д. Г.
+ * \date 09.20
+ */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 

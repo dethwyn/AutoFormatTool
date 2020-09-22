@@ -1,3 +1,9 @@
+/*
+ * \file useractions.h
+ * \brief Объявление класса UserActions
+ * \author Сницарук Д. Г.
+ * \date 09.20
+ */
 #ifndef USERACTIONS_H
 #define USERACTIONS_H
 
@@ -18,6 +24,7 @@ public:
     ~UserActions();
     Settings *settings;
     // Методы основного окна
+    // Обработка нажатия кнопки настроек в меню
     void menuSettings_triggered();
     void bPath_clicked(const QString &path);
     void bFormat_clicked();

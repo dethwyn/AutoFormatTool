@@ -1,3 +1,9 @@
+/*
+ * \file settingform.cpp
+ * \brief Реализация класса SettingForm
+ * \author Сницарук Д. Г.
+ * \date 09.20
+ */
 #include "settingform.h"
 #include "ui_settingform.h"
 

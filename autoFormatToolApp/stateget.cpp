@@ -1,3 +1,9 @@
+/*
+ * \file stateget.cpp
+ * \brief Реализация геттеров класса State
+ * \author Сницарук Д. Г.
+ * \date 09.20
+ */
 #include "state.h"
 // Геттеры главного окна
 QString State::getMenuFileText() {

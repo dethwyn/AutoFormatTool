@@ -1,3 +1,9 @@
+/*
+ * \file useractions.cpp
+ * \brief Реализация класса UserActions
+ * \author Сницарук Д. Г.
+ * \date 09.20
+ */
 #include "useractions.h"
 
 UserActions::UserActions(QObject *parent) : QObject(parent) {
@@ -7,6 +13,7 @@ UserActions::UserActions(QObject *parent) : QObject(parent) {
     instance->setLinePathCfgText(settings->pathCFG);
     instance->setLinePathText(settings->pathLastSource);
     instance->setProgressBarType(settings->progressBarType);
+    ffw = new FormatFileWorker();
     emit runRenderGUI();
 }
 

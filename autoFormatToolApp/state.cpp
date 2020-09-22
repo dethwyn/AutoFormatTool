@@ -1,3 +1,9 @@
+/*
+ * \file state.cpp
+ * \brief Реализация класса State
+ * \author Сницарук Д. Г.
+ * \date 09.20
+ */
 #include "state.h"
 
 State *State::instance = nullptr; // инициализация инстанса

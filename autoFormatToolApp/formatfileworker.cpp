@@ -1,6 +1,17 @@
+/*
+ * \file formatfileworker.cpp
+ * \brief Реализация класса FormatFileWorker
+ * \author Сницарук Д. Г.
+ * \date 09.20
+ */
 #include "formatfileworker.h"
 
 FormatFileWorker::FormatFileWorker(QObject *parent) : QThread(parent) {
+    progresBarMax = 100;
+    fileList = new QFileInfoList();
+    uncrustifyPath = "ucPath";
+    configPath = "cfgPath";
+    progresBarStep = progresBarMax / fileList->count();
 }
 
 FormatFileWorker::FormatFileWorker(int maxPB, QFileInfoList *fList, const QString &ucPath, const QString &cfgPath) {

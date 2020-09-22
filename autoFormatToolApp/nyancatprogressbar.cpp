@@ -1,3 +1,9 @@
+/*
+ * \file nyancatprogressbar.cpp
+ * \brief Реализация класса NyanCatProgressBar
+ * \author Сницарук Д. Г.
+ * \date 09.20
+ */
 #include "nyancatprogressbar.h"
 
 NyanCatProgressBar::NyanCatProgressBar(QWidget *parent) {

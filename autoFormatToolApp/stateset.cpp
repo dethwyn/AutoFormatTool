@@ -1,3 +1,9 @@
+/*
+ * \file stateset.cpp
+ * \brief Реализация сеттеров класса State
+ * \author Сницарук Д. Г.
+ * \date 09.20
+ */
 #include "state.h"
 // Cеттеры главного окна
 void State::setMenuFileText(const QString &text) {
