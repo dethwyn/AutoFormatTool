@@ -33,6 +33,12 @@ int State::getProgressBarType() {
 int State::getProgressBarMax() const {
     return progressBarMax;
 }
+int State::getMinWndHeight() const {
+    return wndMinHeight;
+}
+int State::getMinWndWidth() const {
+    return wndMinWidth;
+}
 // Геттеры окна настроек
 QString State::getButtonBrowseUcText() {
     return buttonBrowseText;

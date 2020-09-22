@@ -33,6 +33,12 @@ void State::setProgressBarType(int type) {
 void State::setProgressBarMax(int value) {
     progressBarMax = value;
 }
+void State::setMinWndWidth(int value) {
+    wndMinWidth = value;
+}
+void State::setMinWndHeight(int value) {
+    wndMinHeight = value;
+}
 // Cеттеры окна настроек
 void State::setButtonBrowseUcText(const QString &text) {
     buttonBrowseUcText = text;

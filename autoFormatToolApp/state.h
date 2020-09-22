@@ -76,9 +76,7 @@ public:
     QString getButtonFormatText();
     int getProgressBarValue();
     int getProgressBarType();
-    int getProgressBarMax() const;   
-    int getMinWndWidth() const;
-    int getMinWndHeight() const;
+    int getProgressBarMax() const;
     // Сеттеры главного окна
     void setMenuFileText(const QString &text);
     void setMenuSettingText(const QString &text);
@@ -94,8 +92,6 @@ public:
     void setProgressBarValue(int value);
     void setProgressBarType(int type);
     void setProgressBarMax(int value);
-    void setMinWndWidth(int value);
-    void setMinWndHeight(int value);
     // Геттеры окна настроек
     QString getButtonBrowseUcText();
     QString getLinePathUcText();
@@ -116,8 +112,14 @@ public:
     void setButtonCloseText(const QString &text);
     // Геттеры разного
     QString getSecretCode() const;
+
     // Сеттеры разного
     void setSecretCode(const QString &value);
+
+    int getMinWndWidth() const;
+    void setMinWndWidth(int value);
+    int getMinWndHeight() const;
+    void setMinWndHeight(int value);
 };
 
 #endif // STATE_H

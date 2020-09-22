@@ -36,6 +36,27 @@ State::~State() {
 /*!
  * \brief – Основной конструктор первоначальной инициализации состояния
  */
+
+int State::getMinWndWidth() const
+{
+    return wndMinWidth;
+}
+
+void State::setMinWndWidth(int value)
+{
+    wndMinWidth = value;
+}
+
+int State::getMinWndHeight() const
+{
+    return wndMinHeight;
+}
+
+void State::setMinWndHeight(int value)
+{
+    wndMinHeight = value;
+}
+
 State::State() {
     // Главное окно
     menuFileText = "Файл";
