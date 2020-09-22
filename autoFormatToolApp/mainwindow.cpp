@@ -90,15 +90,7 @@ void MainWindow::configureUi() {
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event) {
-    auto instance = &State::getInstance();
-    auto minW = instance->getMinWndWidth();
-    auto minH = instance->getMinWndHeight();
-    if(event->size().width() < minW) {
-        resize(minW, event->size().height());
-    }
-    if(event->size().height() < minH) {
-        resize(event->size().width(), minH);
-    }
+
 }
 
 void MainWindow::moveEvent(QMoveEvent *event) {
