@@ -17,7 +17,8 @@ SOURCES += \
     $$PWD/useractions.cpp \
     $$PWD/settings.cpp \
     $$PWD/stateget.cpp \
-    $$PWD/stateset.cpp
+    $$PWD/stateset.cpp \
+    $$PWD/formatfileworker.cpp
 
 HEADERS += \
     $$PWD/mainwindow.h \
@@ -25,7 +26,8 @@ HEADERS += \
     $$PWD/nyancatprogressbar.h \
     $$PWD/state.h \
     $$PWD/useractions.h \
-    $$PWD/settings.h
+    $$PWD/settings.h \
+    $$PWD/formatfileworker.h
 
 FORMS += \
     $$PWD/mainwindow.ui \
