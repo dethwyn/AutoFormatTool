@@ -34,8 +34,6 @@ void MainWindow::renderGUI() {
     foreach(auto item, *instance->getListFileInfos()) {
         ui->listFiles->addItem(item.fileName());
     }
-    this->resize(instance->getWndWidth(), instance->getWndHeight());
-    this->move(instance->getWndPosX(), instance->getWndPosY());
 }
 
 void MainWindow::showMessageBox(const QString &message) {
@@ -92,13 +90,16 @@ void MainWindow::configureUi() {
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event) {
-    int w = event->size().width();
-    int h = event->size().height();
-    userActions->changeSize(w, h);
+    auto instance = &State::getInstance();
+    auto minW = instance->getMinWndWidth();
+    auto minH = instance->getMinWndHeight();
+    if(event->size().width() < minW) {
+        resize(minW, event->size().height());
+    }
+    if(event->size().height() < minH) {
+        resize(event->size().width(), minH);
+    }
 }
 
 void MainWindow::moveEvent(QMoveEvent *event) {
-    int x = event->pos().x();
-    int y = event->pos().y();
-    userActions->moveWindow(x,y);
 }
