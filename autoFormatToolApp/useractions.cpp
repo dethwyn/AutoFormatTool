@@ -43,22 +43,23 @@ void UserActions::bFormat_clicked() {
             emit runRenderGUI();
             return;
         }
-        int progresBarStep = instance->getProgressBarMax() / instance->getListFileInfos()->count();
-        double currentProgressBarValue = 0;
-        instance->setProgressBarValue(static_cast<int>(currentProgressBarValue));
-        while(instance->getListFileInfos()->count() > 0) {
-            QString command("powershell.exe");
-            QStringList params;
-            QString pathToFile = instance->getListFileInfos()->takeFirst().filePath();
-            QString param = "%1 -c %2 -f %3 -o %3 --no-backup";
-            params.append(param.arg(uncrustifyPath).arg(uncrustifyConfigPath).arg(pathToFile));
-            QProcess::execute(command, params);
-            currentProgressBarValue += progresBarStep;
-            instance->setProgressBarValue(static_cast<int>(currentProgressBarValue));
-            emit runRenderGUI();
-        }
-        instance->setProgressBarValue(1000);
-        emit showMessageBox("Форматирование завершено");
+        ffw->start();
+//        int progresBarStep = instance->getProgressBarMax() / instance->getListFileInfos()->count();
+//        double currentProgressBarValue = 0;
+//        instance->setProgressBarValue(static_cast<int>(currentProgressBarValue));
+//        while(instance->getListFileInfos()->count() > 0) {
+//            QString command("powershell.exe");
+//            QStringList params;
+//            QString pathToFile = instance->getListFileInfos()->takeFirst().filePath();
+//            QString param = "%1 -c %2 -f %3 -o %3 --no-backup";
+//            params.append(param.arg(uncrustifyPath).arg(uncrustifyConfigPath).arg(pathToFile));
+//            QProcess::execute(command, params);
+//            currentProgressBarValue += progresBarStep;
+//            instance->setProgressBarValue(static_cast<int>(currentProgressBarValue));
+//            emit runRenderGUI();
+//        }
+//        instance->setProgressBarValue(instance->getProgressBarMax());
+//        emit showMessageBox("Форматирование завершено");
     } else {
         emit showMessageBox("Не выбран ни один файл с исходным кодом!");
     }
@@ -105,6 +106,10 @@ void UserActions::inputSecretCode(const QString &symbol) {
         instance->setProgressBarValue(0);
         instance->setSecretCode("");
         instance->setProgressBarType(1);
+    }  else if(instance->getSecretCode() == "default") {
+        instance->setProgressBarValue(0);
+        instance->setSecretCode("");
+        instance->setProgressBarType(0);
     } else if(instance->getSecretCode().count() >= 7) {
         instance->setSecretCode("");
         instance->setProgressBarType(0);
@@ -154,6 +159,16 @@ void UserActions::bCloseSettingsWindow_clicked() {
     emit runRenderGUI();
 }
 
+void UserActions::threadHandler(int pbValue) {
+    auto instance = &State::getInstance();
+    instance->setProgressBarValue(static_cast<int>(pbValue));
+    emit runRenderGUI();
+}
+
+void UserActions::threadComplete() {
+    emit showMessageBox("Форматирование завершено");
+}
+
 void UserActions::recourceFileFind(const QString &basePath) {
     auto instance = &State::getInstance();
     QDir dir(basePath);
@@ -173,4 +188,11 @@ void UserActions::recourceFileFind(const QString &basePath) {
             instance->addItemListFileInfos(item);
         }
     }
+    auto ucPath = settings->pathUC;
+    auto cfgPath = settings->pathCFG;
+    auto fList = instance->getListFileInfos();
+    auto maxPB = instance->getProgressBarMax();
+    ffw = new FormatFileWorker(maxPB, fList, ucPath, cfgPath);
+    connect(ffw, &FormatFileWorker::step, this, &UserActions::threadHandler);
+    connect(ffw, &FormatFileWorker::completed, this, &UserActions::threadComplete);
 }

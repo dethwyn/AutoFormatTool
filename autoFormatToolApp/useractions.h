@@ -3,6 +3,7 @@
 
 #include "settings.h"
 #include "state.h"
+#include "formatfileworker.h"
 
 #include <QObject>
 #include <QFileDialog>
@@ -31,8 +32,12 @@ public:
     void bOpenPathUC_clicked(const QString &path);
     void bOpenPathCfgUC_clicked(const QString &path);
     void bCloseSettingsWindow_clicked();
+public slots:
+    void threadHandler(int pbValue);
+    void threadComplete();
 private:
     void recourceFileFind(const QString &basePath);
+    FormatFileWorker *ffw;
 signals:
     void runRenderGUI();
     void showMessageBox(QString);
