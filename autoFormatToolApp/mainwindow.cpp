@@ -88,10 +88,3 @@ void MainWindow::configureUi() {
     ui->verticalLayout->addWidget(progressBar);
     selectDirDialog->setFileMode(QFileDialog::DirectoryOnly);
 }
-
-void MainWindow::resizeEvent(QResizeEvent *event) {
-
-}
-
-void MainWindow::moveEvent(QMoveEvent *event) {
-}

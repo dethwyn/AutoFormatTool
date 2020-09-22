@@ -49,8 +49,6 @@ private:
     void configureUi();
 
 protected:
-    virtual void resizeEvent(QResizeEvent *event) override;
-    virtual void moveEvent(QMoveEvent *event) override;
     virtual void keyPressEvent(QKeyEvent *event) override;
 };
 #endif // MAINWINDOW_H
