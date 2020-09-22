@@ -20,56 +20,14 @@ int NyanCatProgressBar::getTypeRay() {
 }
 
 void NyanCatProgressBar::paintEvent(QPaintEvent *) {
-    //
-    auto val = value();
-    auto pos = QStyle::sliderPositionFromValue(minimum(), maximum(), val, width());
+    auto pos = QStyle::sliderPositionFromValue(minimum(), maximum(), value(), width());
     QPainter painter(this);
-    auto pos_draw = 0;
-    QImage src("1.png");
-    auto dest = src.scaled(40, height());
-    QColor colors[] = {k_red, k_orange, k_yellow, k_green, k_lightBlue, k_purple};
-    QColor colors_l[] = {k_red_l, k_orange_l, k_yellow_l, k_green_l, k_lightBlue_l, k_purple_l};
     drawRectBorder(&painter);
     painter.drawRect(3, 3, width() - 7, height() - 7);
     if(typeRay == 1) {
-        int hRect = height() / 6;
-        if(val < maximum() && val > 0) {
-            int i = 0;
-            drawRectBorder(&painter);
-            for(auto &item : colors) {
-                painter.setPen(item);
-                painter.setBrush(item);
-                painter.drawRect(pos_draw, i * hRect + 1, pos, hRect);
-                i++;
-            }
-            painter.drawImage(pos - dest.width() / 2, 0, dest);
-        } else if(val == maximum()) {
-            int i = 0;
-            drawRectBorder(&painter);
-            for(auto &item : colors) {
-                painter.setPen(item);
-                painter.setBrush(item);
-                painter.drawRect(pos_draw, i * hRect + 1, pos - dest.width() / 2, hRect);
-                i++;
-            }
-            painter.drawImage(pos - dest.width(), 0, dest);
-        } else {
-            drawRectBorder(&painter);
-        }
+        drawType1(&painter);
     } else {
-        if(val <= maximum() && val > 0) {
-            drawRectBorder(&painter);
-            painter.drawRect(3, 3, width() - 7, height() - 7);
-            painter.setPen(QColor(127, 127, 127));
-            auto *gradient = new QLinearGradient();
-            gradient->setStart(0, 0);
-            gradient->setFinalStop(pos, height());
-            gradient->setColorAt(0.0, QColor(200, 255, 200));
-            gradient->setColorAt(1.0, QColor(0, 255, 0));
-            painter.setBrush(*gradient);
-            painter.drawRect(0, 0, pos - 1, height() - 1);
-            delete gradient;
-        }
+        drawType2(&painter);
     }
 }
 
@@ -82,4 +40,50 @@ void NyanCatProgressBar::drawRectBorder(QPainter *p) {
     p->setPen(lightGray);
     p->setBrush(lightGray);
     p->drawRect(1, 1, width() - 3, height() - 3);
+}
+
+void NyanCatProgressBar::drawType1(QPainter *p) {
+    QColor colors[] = {k_red, k_orange, k_yellow, k_green, k_lightBlue, k_purple};
+    int hRect = height() / 6;
+    QImage src("1.png");
+    auto pos = QStyle::sliderPositionFromValue(minimum(), maximum(), value(), width());
+    auto dest = src.scaled(40, height());
+    if(value() < maximum() && value() > 0) {
+        int i = 0;
+        drawRectBorder(p);
+        for(auto &item : colors) {
+            p->setPen(item);
+            p->setBrush(item);
+            p->drawRect(0, i * hRect + 1, pos, hRect);
+            i++;
+        }
+        p->drawImage(pos - dest.width() / 2, 0, dest);
+    } else if(value() == maximum()) {
+        int i = 0;
+        drawRectBorder(p);
+        for(auto &item : colors) {
+            p->setPen(item);
+            p->setBrush(item);
+            p->drawRect(0, i * hRect + 1, pos - dest.width() / 2, hRect);
+            i++;
+        }
+        p->drawImage(pos - dest.width(), 0, dest);
+    } else {
+        drawRectBorder(p);
+    }
+}
+
+void NyanCatProgressBar::drawType2(QPainter *p) {
+    auto pos = QStyle::sliderPositionFromValue(minimum(), maximum(), value(), width());
+    if(value() <= maximum() && value() > 0) {
+        drawRectBorder(p);
+        auto *gradient = new QLinearGradient();
+        gradient->setStart(0, 0);
+        gradient->setFinalStop(pos, height());
+        gradient->setColorAt(0.0, QColor(200, 255, 200));
+        gradient->setColorAt(1.0, QColor(0, 255, 0));
+        p->setBrush(*gradient);
+        p->drawRect(1, 1, pos - 3, height() - 3);
+        delete gradient;
+    }
 }
