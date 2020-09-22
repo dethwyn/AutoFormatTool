@@ -112,30 +112,6 @@ void UserActions::inputSecretCode(const QString &symbol) {
     emit runRenderGUI();
 }
 
-void UserActions::moveWindow(int posX, int posY) {
-//    auto instance = &State::getInstance();
-//    instance->setWndPosX(posX);
-//    instance->setWndPosY(posY);
-//    emit runRenderGUI();
-}
-
-void UserActions::changeSize(int width, int height) {
-    auto instance = &State::getInstance();
-    if(width < 510) {
-        instance->setWndWidth(510);
-        instance->setWndPosX(instance->getWndPosX() - 1);
-    } else {
-        instance->setWndHeight(width);
-    }
-    if(height < 335) {
-        instance->setWndHeight(335);
-        instance->setWndPosY(instance->getWndPosX() + 1);
-    } else {
-        instance->setWndHeight(height);
-    }
-    emit runRenderGUI();
-}
-
 void UserActions::tbPathToUC_textChanged(const QString &arg1) {
     auto instance = &State::getInstance();
     instance->setLinePathUcText(arg1);

@@ -37,44 +37,24 @@ State::~State() {
  * \brief – Основной конструктор первоначальной инициализации состояния
  */
 
-int State::getWndPosX() const
+int State::getMinWndWidth() const
 {
-    return wndPosX;
+    return wndMinWidth;
 }
 
-void State::setWndPosX(int value)
+void State::setMinWndWidth(int value)
 {
-    wndPosX = value;
+    wndMinWidth = value;
 }
 
-int State::getWndPosY() const
+int State::getMinWndHeight() const
 {
-    return wndPosY;
+    return wndMinHeight;
 }
 
-void State::setWndPosY(int value)
+void State::setMinWndHeight(int value)
 {
-    wndPosY = value;
-}
-
-int State::getWndWidth() const
-{
-    return wndWidth;
-}
-
-void State::setWndWidth(int value)
-{
-    wndWidth = value;
-}
-
-int State::getWndHeight() const
-{
-    return wndHeight;
-}
-
-void State::setWndHeight(int value)
-{
-    wndHeight = value;
+    wndMinHeight = value;
 }
 
 State::State() {
@@ -92,10 +72,8 @@ State::State() {
     progressBarValue = 0;
     progressBarType = 0;
     progressBarMax = 1000;
-    wndPosX = 100;
-    wndPosY = 100;
-    wndWidth = 510;
-    wndHeight = 300;
+    wndMinWidth = 500;
+    wndMinHeight = 300;
     // Окно настроек
     buttonBrowseUcText = "Обзор";
     linePathUcText = "";
