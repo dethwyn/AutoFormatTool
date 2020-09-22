@@ -44,22 +44,6 @@ void UserActions::bFormat_clicked() {
             return;
         }
         ffw->start();
-//        int progresBarStep = instance->getProgressBarMax() / instance->getListFileInfos()->count();
-//        double currentProgressBarValue = 0;
-//        instance->setProgressBarValue(static_cast<int>(currentProgressBarValue));
-//        while(instance->getListFileInfos()->count() > 0) {
-//            QString command("powershell.exe");
-//            QStringList params;
-//            QString pathToFile = instance->getListFileInfos()->takeFirst().filePath();
-//            QString param = "%1 -c %2 -f %3 -o %3 --no-backup";
-//            params.append(param.arg(uncrustifyPath).arg(uncrustifyConfigPath).arg(pathToFile));
-//            QProcess::execute(command, params);
-//            currentProgressBarValue += progresBarStep;
-//            instance->setProgressBarValue(static_cast<int>(currentProgressBarValue));
-//            emit runRenderGUI();
-//        }
-//        instance->setProgressBarValue(instance->getProgressBarMax());
-//        emit showMessageBox("Форматирование завершено");
     } else {
         emit showMessageBox("Не выбран ни один файл с исходным кодом!");
     }
@@ -165,8 +149,9 @@ void UserActions::threadHandler(int pbValue) {
     emit runRenderGUI();
 }
 
-void UserActions::threadComplete() {
-    emit showMessageBox("Форматирование завершено");
+void UserActions::threadComplete(int problemCnt) {
+    QString result = "Форматирование завершено\nС ошибкой - %1";
+    emit showMessageBox(result.arg(problemCnt));
 }
 
 void UserActions::recourceFileFind(const QString &basePath) {

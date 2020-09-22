@@ -34,7 +34,7 @@ public:
     void bCloseSettingsWindow_clicked();
 public slots:
     void threadHandler(int pbValue);
-    void threadComplete();
+    void threadComplete(int problemCnt);
 private:
     void recourceFileFind(const QString &basePath);
     FormatFileWorker *ffw;

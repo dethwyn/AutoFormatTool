@@ -20,7 +20,7 @@ private:
     QString configPath;
     int progresBarStep;
 signals:
-    void completed();
+    void completed(int);
     void step(int);
 public slots:
 };
