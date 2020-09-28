@@ -13,13 +13,17 @@ FormatFileWorker::FormatFileWorker(QObject *parent) : QThread(parent) {
     configPath = "cfgPath";
     progresBarStep = progresBarMax / fileList->count();
 }
-
+/*!
+ * @brief Реализация класса FormatFileWorker
+ * @param maxPB
+ */
 FormatFileWorker::FormatFileWorker(int maxPB, QFileInfoList *fList, const QString &ucPath, const QString &cfgPath) {
     progresBarMax = maxPB;
     fileList = fList;
     uncrustifyPath = ucPath;
     configPath = cfgPath;
     progresBarStep = progresBarMax / fileList->count();
+    FormatFileWorker f(2, fileList, "ww", "ww");
 }
 
 void FormatFileWorker::run() {
